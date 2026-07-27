@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Inter, Open Sans, sans-serif;
+  background: #ffffff;
+  color: #0b0b0b;
+}
+
+html.dark body {
+  background: #0b0b0b;
+  color: #f5f7fa;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:focus-visible {
+  outline: 2px solid #ff6a00;
+  outline-offset: 2px;
+}

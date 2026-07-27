@@ -1,0 +1,101 @@
+.hero-section {
+
+  min-height:430px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  text-align:center;
+
+  padding:40px 20px;
+
+  background-size:cover;
+
+  background-position:center;
+
+  position:relative;
+
+}
+
+
+
+.hero-section::before {
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+
+  background:
+
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,107,0,.35),
+      transparent 35%
+    ),
+
+
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(37,99,235,.35),
+      transparent 40%
+    );
+
+}
+
+
+
+.hero-overlay {
+
+  position:relative;
+
+  z-index:2;
+
+  max-width:900px;
+
+  color:white;
+
+}
+
+
+
+.hero-badge {
+
+  display:inline-block;
+
+  padding:8px 18px;
+
+  border-radius:30px;
+
+  background:rgba(255,255,255,.15);
+
+  margin-bottom:20px;
+
+}
+
+
+
+.hero-overlay h1 {
+
+  font-size:clamp(32px,5vw,52px);
+
+  margin-bottom:20px;
+
+}
+
+
+
+.hero-overlay p {
+
+  font-size:18px;
+
+  line-height:1.7;
+
+  color:#e5e7eb;
+
+}

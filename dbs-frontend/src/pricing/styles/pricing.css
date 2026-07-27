@@ -1,0 +1,761 @@
+/* =========================
+   PRICING CONTAINER
+========================= */
+
+.pricing-container {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.pricing-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.pricing-header p {
+  color: #666;
+  margin-top: 10px;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.pricing-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 25px;
+  border: 1px solid #eee;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* POPULAR BADGE */
+.pricing-card.popular {
+  border: 2px solid #ff6a00;
+}
+
+.pricing-card.popular::before {
+  content: "Populaire";
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  background: #ff6a00;
+  color: white;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* HEADER */
+.pricing-card-header h3 {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+
+.pricing-card-header p {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* PRICE */
+.pricing-card-price {
+  margin: 20px 0;
+}
+
+.pricing-card-price h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
+}
+
+/* FEATURES */
+.pricing-card-features {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.pricing-card-features li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+/* BUTTON */
+.pricing-card-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #ff6a00;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pricing-card-btn:hover {
+  background: #e85d00;
+}
+
+/* =========================
+   CURRENCY TOGGLE
+========================= */
+
+.currency-toggle {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.currency-btn {
+  padding: 8px 14px;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  background: white;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.currency-btn:hover {
+  border-color: #ff6a00;
+  color: #ff6a00;
+}
+
+.currency-btn.active {
+  background: #ff6a00;
+  color: white;
+  border-color: #ff6a00;
+}
+
+.currency-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 10px;
+  color: #555;
+}
+
+.currency-options {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.currency-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ======================================
+   PRICING PAGE
+====================================== */
+
+.pricing-hero {
+  text-align: center;
+  padding: 80px 20px 60px;
+  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  color: #fff;
+}
+
+.pricing-hero h1 {
+  font-size: 3rem;
+  margin: 20px 0;
+}
+
+.pricing-hero p {
+  max-width: 700px;
+  margin: auto;
+  font-size: 1.1rem;
+  opacity: .9;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 18px;
+  background: #ff6a00;
+  color: #fff;
+  border-radius: 30px;
+  font-weight: 600;
+}
+
+/* ======================== */
+
+.advantages {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.advantages h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+}
+
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap: 30px;
+}
+
+.advantages-grid > div {
+  padding: 30px;
+  background: #fff;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.advantages-grid svg {
+  color: #ff6a00;
+  margin-bottom: 15px;
+}
+
+.advantages-grid h3 {
+  margin-bottom: 15px;
+}
+
+/* ======================== */
+
+.faq {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+
+.faq h2 {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.faq details {
+  background: #fff;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  padding: 18px 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,.05);
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.faq p {
+  margin-top: 15px;
+  color: #666;
+}
+
+/* ======================== */
+
+.pricing-cta {
+  text-align: center;
+  padding: 80px 20px;
+  background: #0f172a;
+  color: white;
+}
+
+.pricing-cta h2 {
+  margin: 20px 0;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: #ff6a00;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.btn-primary:hover {
+  background: #e55d00;
+}
+
+/* =====================================================
+   PRICING COMPARISON
+===================================================== */
+
+.pricing-comparison {
+  width: 100%;
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 40px 20px;
+}
+
+
+/* HEADER */
+
+.comparison-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.comparison-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.comparison-header p {
+  color: #6b7280;
+  font-size: 1.05rem;
+}
+
+
+/* TABLE WRAPPER */
+
+.comparison-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+
+/* TABLE */
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 850px;
+}
+
+
+/* HEADER TABLE */
+
+.comparison-table thead {
+  background: linear-gradient(
+    135deg,
+    #ff7a00,
+    #ff9d3d
+  );
+  color: white;
+}
+
+
+.comparison-table th {
+  padding: 25px 20px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+
+/* Premier header colonne */
+
+.comparison-table th:first-child {
+  text-align: left;
+}
+
+
+/* PLAN NAME */
+
+.plan-name {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+
+/* PRICE */
+
+.plan-price {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+
+/* BODY */
+
+.comparison-table td {
+  padding: 18px 20px;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+}
+
+
+/* FEATURE COLUMN */
+
+.feature-name {
+  text-align: left !important;
+  font-weight: 600;
+  color: #111827;
+}
+
+
+/* HOVER */
+
+.comparison-table tbody tr:hover {
+  background: #fff7ed;
+}
+
+
+/* ICON CHECK */
+
+.comparison-table svg {
+  margin: auto;
+  color: #16a34a;
+}
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .pricing-comparison {
+    padding: 20px 10px;
+    margin: 50px auto;
+  }
+
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 14px 12px;
+  }
+
+
+  .comparison-header h2 {
+    font-size: 1.6rem;
+  }
+
+}
+
+/* ==============================
+   PRICING CTA
+============================== */
+
+
+.pricing-cta {
+
+  background: #111827;
+
+  min-height: 260px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  padding: 40px 20px;
+
+}
+
+
+
+.pricing-cta-icon {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin-bottom: 20px;
+
+  color: white;
+
+}
+
+
+
+.pricing-cta-content {
+
+  max-width: 800px;
+
+}
+
+
+
+.pricing-cta-description {
+
+  color: #e5e7eb;
+
+  font-size: 16px;
+
+  line-height: 1.6;
+
+  margin-bottom: 8px;
+
+}
+
+
+
+.pricing-cta-description.secondary {
+
+  color: #cbd5e1;
+
+  margin-bottom: 25px;
+
+}
+
+
+
+.pricing-cta-content h3 {
+
+  color: white;
+
+  font-size: 20px;
+
+  font-weight: 600;
+
+  margin-bottom: 25px;
+
+}
+
+
+
+.pricing-cta-button {
+
+  background: #ff6b00;
+
+  color: white;
+
+  border: none;
+
+  padding: 14px 32px;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  transition: transform .2s ease;
+
+}
+
+
+
+.pricing-cta-button:hover {
+
+  transform: translateY(-2px);
+
+}
+
+
+
+@media(max-width:768px){
+
+  .pricing-cta-description {
+
+    font-size:14px;
+
+  }
+
+
+  .pricing-cta-content h3 {
+
+    font-size:18px;
+
+  }
+
+}
+
+/* =====================================
+   PRICING HERO
+===================================== */
+
+.pricing-hero {
+
+  position: relative;
+
+  min-height: 430px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  text-align:center;
+
+  padding:40px 20px;
+
+  background-size:cover;
+
+  background-position:center;
+
+}
+
+.pricing-hero::before {
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,107,0,0.35),
+      transparent 35%
+    ),
+
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(37,99,235,0.35),
+      transparent 40%
+    );
+
+  pointer-events:none;
+
+}
+
+
+
+/* contenu au-dessus de l'image */
+
+.pricing-hero-overlay {
+
+  position:relative;
+
+  z-index:2;
+
+}
+
+
+
+/* Badge */
+
+.pricing-hero .badge {
+
+  display: inline-block;
+
+  padding: 8px 18px;
+
+  border-radius: 30px;
+
+  background: rgba(255,255,255,0.15);
+
+  color:white;
+
+  margin-bottom:20px;
+
+}
+
+
+
+/* Titre */
+
+.pricing-hero h1 {
+
+  font-size: clamp(32px,5vw,52px);
+
+  font-weight:700;
+
+  margin-bottom:20px;
+
+}
+
+
+
+/* Description */
+
+.pricing-hero p {
+
+  font-size:18px;
+
+  max-width:700px;
+
+  margin:auto;
+
+  line-height:1.7;
+
+  color:#e5e7eb;
+
+}
+
+/* =====================================
+   DARK MODE
+===================================== */
+
+html.dark .pricing-header p,
+html.dark .advantages h2,
+html.dark .faq h2 {
+  color: #f5f7fa;
+}
+
+html.dark .pricing-card,
+html.dark .advantages-grid > div,
+html.dark .faq details,
+html.dark .comparison-table-wrapper {
+  background: #111827;
+  border-color: #1f2937;
+  box-shadow: none;
+}
+
+html.dark .pricing-card-header p,
+html.dark .faq p,
+html.dark .comparison-header p {
+  color: #d1d5db;
+}
+
+html.dark .pricing-card-price h2,
+html.dark .comparison-header h2,
+html.dark .feature-name {
+  color: #f5f7fa;
+}
+
+html.dark .comparison-table td {
+  color: #d1d5db;
+  border-bottom-color: #1f2937;
+}
+
+html.dark .comparison-table tbody tr:hover {
+  background: rgba(255, 106, 0, 0.08);
+}
+
+html.dark .currency-btn {
+  background: #111827;
+  border-color: #374151;
+  color: #d1d5db;
+}
+
+html.dark .currency-label {
+  color: #9ca3af;
+}

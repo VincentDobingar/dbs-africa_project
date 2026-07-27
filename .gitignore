@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+*.zip
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Stale AI-context export dumps (regenerable via export-module-context.sh / architecture.sh)
+contexte-module-partenaires.txt
+architecture-dbs-africa.txt
