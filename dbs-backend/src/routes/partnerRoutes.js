@@ -50,6 +50,13 @@ const {
   "../middlewares/partnerAuthMiddleware"
 );
 
+const {
+  authLimiter,
+  publicFormLimiter,
+} = require(
+  "../middlewares/rateLimiter"
+);
+
 const router = express.Router();
 
 // ============================================================
@@ -59,18 +66,21 @@ const router = express.Router();
 // Inscription d’un nouveau partenaire
 router.post(
   "/register",
+  publicFormLimiter,
   registerPartner
 );
 
 // Activation après approbation
 router.post(
   "/auth/activate",
+  publicFormLimiter,
   activatePartnerAccount
 );
 
 // Connexion du partenaire
 router.post(
   "/auth/login",
+  authLimiter,
   loginPartner
 );
 

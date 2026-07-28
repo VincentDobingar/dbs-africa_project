@@ -26,6 +26,7 @@ import PricingPage from "./pages/public/PricingPage";
 import Blog from "./pages/public/Blog";
 import Contact from "./pages/public/Contact";
 import QuoteRequest from "./pages/public/QuoteRequest";
+import NotFound from "./pages/public/NotFound";
 
 /* ADMIN */
 import Login from "./pages/admin/Login";
@@ -274,6 +275,15 @@ export default function App() {
                 element={<UsersManager />}
               />
             </Route>
+
+            {/* ======================================== */}
+            {/* PAGE 404                                  */}
+            {/* ======================================== */}
+
+            <Route
+              path="*"
+              element={<NotFound />}
+            />
           </Routes>
             </motion.div>
           </AnimatePresence>

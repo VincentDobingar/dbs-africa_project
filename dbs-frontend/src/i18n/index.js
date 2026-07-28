@@ -47,6 +47,14 @@ const resources = {
         switchToDark: "Activer le mode sombre",
       },
 
+      notFoundPage: {
+        title: "Page introuvable",
+        description:
+          "La page que vous recherchez n'existe pas ou a été déplacée. Vérifiez l'adresse ou retournez à l'accueil.",
+        backHome: "Retour à l'accueil",
+        contactUs: "Nous contacter",
+      },
+
       hero: {
         title:
           "Solutions Digitales. Intelligence des Données. Croissance des Entreprises.",
@@ -1363,6 +1371,14 @@ const resources = {
         skipToContent: "Skip to content",
         switchToLight: "Switch to light mode",
         switchToDark: "Switch to dark mode",
+      },
+
+      notFoundPage: {
+        title: "Page not found",
+        description:
+          "The page you are looking for doesn't exist or has been moved. Check the address or head back home.",
+        backHome: "Back to home",
+        contactUs: "Contact us",
       },
 
       hero: {
