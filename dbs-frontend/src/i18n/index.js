@@ -1116,6 +1116,16 @@ const resources = {
             feature4: "Performance réseau",
           },
 
+          network: {
+            title: "Réseaux & Infrastructures",
+            description:
+              "Conception, déploiement et supervision de réseaux d'entreprise fiables et sécurisés, du LAN au data center.",
+            feature1: "Architecture LAN/WAN",
+            feature2: "Réseaux sans fil (Wi-Fi)",
+            feature3: "SD-WAN et interconnexion de sites",
+            feature4: "Supervision et maintenance réseau",
+          },
+
           beneficiaries: {
             title: "Gestion des Bénéficiaires",
             description:
@@ -1198,6 +1208,11 @@ const resources = {
             title: "Télécommunications",
             description:
               "Nous apportons une expertise pointue en OSS/BSS, assurance des revenus et analytique télécom.",
+          },
+          network: {
+            title: "Réseaux & Infrastructures",
+            description:
+              "Nous concevons, déployons et supervisons des infrastructures réseau fiables — LAN, WAN, sans fil et data center — pour connecter durablement vos sites et vos équipes.",
           },
           gis: {
             title: "GIS & Intelligence Spatiale",
@@ -2457,6 +2472,16 @@ const resources = {
             feature4: "Network performance",
           },
 
+          network: {
+            title: "Networks & Infrastructure",
+            description:
+              "Design, deployment and monitoring of reliable, secure enterprise networks, from LAN to data center.",
+            feature1: "LAN/WAN Architecture",
+            feature2: "Wireless Networks (Wi-Fi)",
+            feature3: "SD-WAN & Site Interconnection",
+            feature4: "Network Monitoring & Maintenance",
+          },
+
           beneficiaries: {
             title: "Beneficiary Management",
             description:
@@ -2540,6 +2565,11 @@ const resources = {
             title: "Telecommunications",
             description:
               "We bring deep expertise in OSS/BSS, revenue assurance and telecom analytics.",
+          },
+          network: {
+            title: "Networks & Infrastructure",
+            description:
+              "We design, deploy and monitor reliable network infrastructure — LAN, WAN, wireless and data center — to keep your sites and teams durably connected.",
           },
           gis: {
             title: "GIS & Spatial Intelligence",

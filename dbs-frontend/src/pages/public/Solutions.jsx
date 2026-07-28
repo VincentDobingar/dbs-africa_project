@@ -1,3 +1,4 @@
+import { cloneElement } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -5,6 +6,7 @@ import {
   BriefcaseBusiness,
   Check,
   RadioTower,
+  Network,
   Users,
   Code2,
   Megaphone,
@@ -21,6 +23,7 @@ import webDevelopmentImg from "../../assets/solutions/web-development.jpg";
 import businessIntelligenceImg from "../../assets/solutions/business-intelligence.jpg";
 import monitoringEvaluationImg from "../../assets/solutions/monitoring-evaluation.jpg";
 import telecomMobileMoneyImg from "../../assets/solutions/telecom-mobile-money.jpg";
+import networkInfrastructureImg from "../../assets/solutions/network-infrastructure.jpg";
 import beneficiaryManagementImg from "../../assets/solutions/beneficiary-management.jpg";
 import recruitmentPortalImg from "../../assets/solutions/recruitment-portal.jpg";
 import digitalMarketingImg from "../../assets/solutions/digital-marketing.jpg";
@@ -96,6 +99,20 @@ export default function Solutions() {
             t("solutionsPage.items.telecom.feature2"),
             t("solutionsPage.items.telecom.feature3"),
             t("solutionsPage.items.telecom.feature4"),
+        ],
+        path: "/portfolio",
+    },
+    {
+        key: "network",
+        icon: <Network size={26} />,
+        image: networkInfrastructureImg,
+        title: t("solutionsPage.items.network.title"),
+        description: t("solutionsPage.items.network.description"),
+        features: [
+            t("solutionsPage.items.network.feature1"),
+            t("solutionsPage.items.network.feature2"),
+            t("solutionsPage.items.network.feature3"),
+            t("solutionsPage.items.network.feature4"),
         ],
         path: "/portfolio",
     },
@@ -238,13 +255,19 @@ export default function Solutions() {
                   </Link>
                 </div>
 
-                <div className="relative mt-1 h-64 overflow-hidden bg-white">
-                  <img
-                    src={solution.image}
-                    alt={solution.title}
-                    loading="lazy"
-                    className="h-full w-full object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
+                <div className="relative mt-1 h-64 overflow-hidden bg-white dark:bg-gray-900">
+                  {solution.image ? (
+                    <img
+                      src={solution.image}
+                      alt={solution.title}
+                      loading="lazy"
+                      className="h-full w-full object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-dbsDark to-orange-950 text-white/70">
+                      {cloneElement(solution.icon, { size: 56 })}
+                    </div>
+                  )}
 
                   <div className="pointer-events-none absolute bottom-0 right-0 h-28 w-28 translate-x-10 translate-y-10 rounded-full bg-dbsOrange/90" />
                 </div>
