@@ -11,6 +11,7 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from "./shared/components/ScrollToTop";
 import ScrollProgress from "./shared/components/ScrollProgress";
+import ErrorBoundary from "./shared/components/ErrorBoundary";
 
 /* PUBLIC PAGES */
 import Home from "./pages/public/Home";
@@ -98,6 +99,7 @@ export default function App() {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25 }}
             >
+          <ErrorBoundary resetKey={location.pathname}>
           <Routes location={location}>
             {/* ======================================== */}
             {/* ROUTES PUBLIQUES                         */}
@@ -285,6 +287,7 @@ export default function App() {
               element={<NotFound />}
             />
           </Routes>
+          </ErrorBoundary>
             </motion.div>
           </AnimatePresence>
         </main>

@@ -2338,13 +2338,6 @@ const resources = {
 
       technologies: {
         label: "Our Technologies",
-        title: "Modern tools for high-performance solutions",
-        description:
-          "We use industry-proven technologies to build reliable, scalable and business-oriented digital solutions.",
-      },
-
-      technologies: {
-        label: "Our Technologies",
 
         title: "Modern Technologies Driving Business Growth",
 
