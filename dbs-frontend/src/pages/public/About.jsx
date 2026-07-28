@@ -55,10 +55,10 @@
   import HeroSection from "../../shared/components/HeroSection";
   import Seo from "../../shared/components/Seo";
 
-  import aminaPhoto from "../../assets/team/amina-ngarambe.png";
-  import alainPhoto from "../../assets/team/alain-mahamat.png";
-  import nadegePhoto from "../../assets/team/nadege-kabore.png";
-  import abdoulayePhoto from "../../assets/team/abdoulaye-barthelemy.png";
+  import aminaPhoto from "../../assets/team/amina-ngarambe.jpg";
+  import alainPhoto from "../../assets/team/alain-mahamat.jpg";
+  import nadegePhoto from "../../assets/team/nadege-kabore.jpg";
+  import abdoulayePhoto from "../../assets/team/abdoulaye-barthelemy.jpg";
 
   export default function About() {
     const {
