@@ -76,6 +76,66 @@ npm run dev              # http://localhost:5173 (ou port suivant si occupé)
 - `src/context/ThemeContext.jsx` — dark/light mode
 - `src/pricing/` — module de tarification (devises, comparatif)
 
+## Déploiement du backend en production (cPanel)
+
+Cible : sous-domaine `api.dbs-africa.org`, transfert par upload manuel (pas de Git côté serveur).
+
+### 1. Créer le sous-domaine
+
+Dans cPanel → **Domaines** → **Créer un domaine** (ou **Sous-domaines** selon la version) : `api.dbs-africa.org`, racine document au choix (peu importe, l'app Node.js ne sert pas de fichiers statiques via ce dossier — cPanel écrase le contenu de ce dossier avec son proxy Passenger).
+
+### 2. Préparer l'archive à envoyer
+
+En local, zippez **`dbs-backend/`** en excluant :
+- `node_modules/` (sera réinstallé sur le serveur avec le bon binaire Node — ne jamais uploader un `node_modules` généré sur une autre machine/OS)
+- `.env` (sera recréé directement sur le serveur avec les vraies valeurs de prod — ne jamais l'uploader tel quel non plus, même si ce n'est "que" du FTP)
+- `.git/` si présent
+
+### 3. Uploader
+
+cPanel → **Gestionnaire de fichiers** (ou FTP) → naviguer jusqu'au dossier du sous-domaine → uploader le zip → clic droit → **Extraire**.
+
+### 4. Créer l'application Node.js
+
+cPanel → **Setup Node.js App** → **Create Application** :
+- **Node.js version** : la plus haute version LTS proposée (18 ou 20 — éviter les versions "Current"/non-LTS)
+- **Application mode** : Production
+- **Application root** : le dossier où le zip a été extrait (ex. `api.dbs-africa.org`)
+- **Application URL** : `api.dbs-africa.org`
+- **Application startup file** : `src/server.js`
+
+Cliquer **Create**. cPanel génère un fichier `.htaccess` et affiche une commande `source /home/.../virtualenv/.../activate` — c'est normal, sert pour un accès SSH éventuel.
+
+### 5. Variables d'environnement
+
+Toujours dans **Setup Node.js App** → l'application créée → section **Environment Variables** : ajouter une par une toutes les clés listées plus haut (`DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_PORT`, `JWT_SECRET`, `PARTNER_JWT_SECRET`, `PARTNER_JWT_EXPIRES_IN`, `FRONTEND_URL`, `MAIL_*`, `ADMIN_SEED_*`), avec les **vraies valeurs de production** :
+- `FRONTEND_URL` → `https://dbs-africa.org` (pas localhost — sinon CORS bloque le site en prod)
+- `JWT_SECRET` / `PARTNER_JWT_SECRET` → générer de nouvelles valeurs fortes pour la prod, différentes de celles utilisées en local
+- `DB_HOST` → généralement `localhost` sur cPanel
+- `DB_USER` / `DB_NAME` → cPanel préfixe automatiquement par le nom du compte d'hébergement (ex. `moncompte_dbs_user`) — vérifier le nom exact créé à l'étape suivante
+
+*(Si l'hébergeur ne propose pas cette section, créer un fichier `.env` directement sur le serveur via le gestionnaire de fichiers, avec le même contenu que `.env.example` mais rempli.)*
+
+### 6. Base de données MySQL
+
+cPanel → **Bases de données MySQL** :
+1. Créer la base (ex. `moncompte_dbs_africa`)
+2. Créer l'utilisateur (ex. `moncompte_dbs_user`) avec un mot de passe fort
+3. Associer l'utilisateur à la base avec **tous les privilèges**
+4. Importer le schéma via **phpMyAdmin** → sélectionner la base → **Importer** → `dbs-backend/Script_db.sql` (retirer/adapter la ligne `CREATE USER ... IDENTIFIED BY 'CHANGE_ME'` et `CREATE DATABASE` en tête du script, cPanel a déjà créé la base et l'utilisateur à l'étape précédente)
+
+### 7. Installer les dépendances et lancer
+
+Dans **Setup Node.js App** → l'application → **Run NPM Install** (bouton dédié : installe avec le Node/npm du serveur, donc compile correctement les dépendances natives si besoin). Puis **Restart**.
+
+### 8. Vérifier
+
+`https://api.dbs-africa.org/health` doit répondre `{"success":true,"status":"OK",...}`.
+
+### 9. Frontend
+
+Sur l'hébergement du frontend, définir `VITE_API_URL=https://api.dbs-africa.org/api` avant `npm run build`, puis déployer le contenu de `dbs-frontend/dist/`.
+
 ## État du projet
 
 Refonte réalisée en plusieurs phases : structure des 11 pages, cohérence visuelle, dark mode / SEO structuré / accessibilité / animations, catégorisation du portfolio (Web / Data / Humanitaire). Voir l'historique Git pour le détail des changements.
