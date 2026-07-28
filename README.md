@@ -82,7 +82,8 @@ Refonte réalisée en plusieurs phases : structure des 11 pages, cohérence visu
 
 ### Points de vigilance connus
 
-- `react` / `react-dom` ne sont pas déclarés dans `dbs-frontend/package.json` (dépendance transitive installée) — à corriger.
 - Pas de tests automatisés ni de linting configuré.
-- Images non optimisées dans `dbs-frontend/src/assets/` (plusieurs Mo chacune) — à compresser/convertir en WebP.
-- Pas de rate-limiting sur les routes publiques du backend (`/api/contact`, `/api/quotes`, `/api/auth/login`).
+- La validation de schéma (Zod) couvre `/api/contact`, `/api/quotes`, `/api/auth/login` et `/api/partner/auth/login` ; `/api/partner/register` et `/api/partner/auth/activate` reposent encore uniquement sur la validation manuelle déjà présente dans leurs contrôleurs (non dupliquée pour éviter les conflits de règles).
+- La section "Autres réalisations" du portfolio, gérée depuis l'admin (`PortfolioManager`), n'est plus affichée nulle part côté public depuis la refonte de la page Portfolio — l'admin peut toujours y ajouter des projets, mais rien ne s'affiche aux visiteurs tant que ce n'est pas réintégré.
+
+**Vulnérabilité `npm audit` non corrigée (décision documentée)** : l'advisory [GHSA-qwww-vcr4-c8h2](https://github.com/advisories/GHSA-qwww-vcr4-c8h2) sur `react-router` concerne un contournement CSRF spécifique au **RSC Mode** (React Server Components) de React Router. Cette application est une SPA 100% client (`<BrowserRouter>` simple, aucun loader/action, aucune API `unstable_RSC*`) — le code vulnérable n'est pas exercé. `npm audit fix --force` proposerait une **rétrogradation** vers `react-router-dom@7.11.0` (changement cassant), ce qui n'est pas justifié ici. À réévaluer lors de la prochaine mise à jour majeure de `react-router-dom`.

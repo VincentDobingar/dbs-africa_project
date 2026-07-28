@@ -57,6 +57,9 @@ const {
   "../middlewares/rateLimiter"
 );
 
+const validate = require("../middlewares/validate");
+const { partnerLoginSchema } = require("../validators");
+
 const router = express.Router();
 
 // ============================================================
@@ -81,6 +84,7 @@ router.post(
 router.post(
   "/auth/login",
   authLimiter,
+  validate(partnerLoginSchema),
   loginPartner
 );
 

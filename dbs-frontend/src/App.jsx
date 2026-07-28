@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import {
   Navigate,
   Route,
@@ -12,6 +13,7 @@ import Footer from "./components/layout/Footer";
 import ScrollToTop from "./shared/components/ScrollToTop";
 import ScrollProgress from "./shared/components/ScrollProgress";
 import ErrorBoundary from "./shared/components/ErrorBoundary";
+import RouteLoader from "./shared/components/RouteLoader";
 
 /* PUBLIC PAGES */
 import Home from "./pages/public/Home";
@@ -23,35 +25,48 @@ import Technologies from "./pages/public/Technologies";
 import Portfolio from "./pages/public/Portfolio";
 import Certifications from "./pages/public/Certifications";
 import Careers from "./pages/public/Careers";
-import PricingPage from "./pages/public/PricingPage";
 import Blog from "./pages/public/Blog";
 import Contact from "./pages/public/Contact";
 import QuoteRequest from "./pages/public/QuoteRequest";
 import NotFound from "./pages/public/NotFound";
 
-/* ADMIN */
-import Login from "./pages/admin/Login";
-import Dashboard from "./pages/admin/Dashboard";
-import Messages from "./pages/admin/Messages";
-import Quotes from "./pages/admin/Quotes";
-import AdminLayout from "./pages/admin/AdminLayout";
-import ProtectedRoute from "./pages/admin/ProtectedRoute";
-import NewsManager from "./pages/admin/NewsManager";
-import ActualitesManager from "./pages/admin/ActualitesManager";
-import PortfolioManager from "./pages/admin/PortfolioManager";
-import SettingsManager from "./pages/admin/SettingsManager";
-import UsersManager from "./pages/admin/UsersManager";
+/* PRICING (lazy: pulls in the pricing module + recharts-adjacent data) */
+const PricingPage = lazy(() => import("./pages/public/PricingPage"));
 
-/* PARTNERS */
-import PartnerRegister from "./modules/partners/pages/PartnerRegister";
-import PartnerActivate from "./modules/partners/pages/PartnerActivate";
-import PartnerLogin from "./modules/partners/pages/PartnerLogin";
-import PartnerDashboard from "./modules/partners/pages/PartnerDashboard";
-import PartnersManager from "./pages/admin/PartnersManager";
+/* ADMIN (lazy: not needed by public visitors, pulls in recharts) */
+const Login = lazy(() => import("./pages/admin/Login"));
+const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
+const Messages = lazy(() => import("./pages/admin/Messages"));
+const Quotes = lazy(() => import("./pages/admin/Quotes"));
+const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
+const ProtectedRoute = lazy(() => import("./pages/admin/ProtectedRoute"));
+const NewsManager = lazy(() => import("./pages/admin/NewsManager"));
+const ActualitesManager = lazy(() =>
+  import("./pages/admin/ActualitesManager")
+);
+const PortfolioManager = lazy(() => import("./pages/admin/PortfolioManager"));
+const SettingsManager = lazy(() => import("./pages/admin/SettingsManager"));
+const UsersManager = lazy(() => import("./pages/admin/UsersManager"));
+const PartnersManager = lazy(() => import("./pages/admin/PartnersManager"));
 
-import PartnerProtectedRoute from "./modules/partners/components/PartnerProtectedRoute";
+/* PARTNERS (lazy: not needed by public visitors) */
+const PartnerRegister = lazy(() =>
+  import("./modules/partners/pages/PartnerRegister")
+);
+const PartnerActivate = lazy(() =>
+  import("./modules/partners/pages/PartnerActivate")
+);
+const PartnerLogin = lazy(() =>
+  import("./modules/partners/pages/PartnerLogin")
+);
+const PartnerDashboard = lazy(() =>
+  import("./modules/partners/pages/PartnerDashboard")
+);
+const PartnerProtectedRoute = lazy(() =>
+  import("./modules/partners/components/PartnerProtectedRoute")
+);
 
-/* PRICING */
+/* PRICING PROVIDER */
 import {
   PricingProvider,
 } from "./pricing/context/PricingContext";
@@ -100,6 +115,7 @@ export default function App() {
               transition={{ duration: 0.25 }}
             >
           <ErrorBoundary resetKey={location.pathname}>
+          <Suspense fallback={<RouteLoader />}>
           <Routes location={location}>
             {/* ======================================== */}
             {/* ROUTES PUBLIQUES                         */}
@@ -287,6 +303,7 @@ export default function App() {
               element={<NotFound />}
             />
           </Routes>
+          </Suspense>
           </ErrorBoundary>
             </motion.div>
           </AnimatePresence>
