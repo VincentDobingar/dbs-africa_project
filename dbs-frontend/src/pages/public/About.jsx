@@ -59,6 +59,9 @@
   import alainPhoto from "../../assets/team/alain-mahamat.jpg";
   import nadegePhoto from "../../assets/team/nadege-kabore.jpg";
   import abdoulayePhoto from "../../assets/team/abdoulaye-barthelemy.jpg";
+  import clementPhoto from "../../assets/team/webba-clement.jpg";
+  import didierPhoto from "../../assets/team/didier-mingue.jpg";
+  import amitPhoto from "../../assets/team/amit-singh.jpg";
 
   export default function About() {
     const {
@@ -441,6 +444,59 @@
       },
       {
         id: 2,
+        name: "Clément Woueba",
+        role: t("about.team.members.clement.role", {
+          defaultValue: "Consultant – Responsable Cybersécurité",
+        }),
+        description: t(
+          "about.team.members.clement.description",
+          {
+            defaultValue:
+              "Ingénieur en cybersécurité avec plus de 4 ans d'expérience dans la protection des systèmes d'information : gouvernance de la sécurité, détection et réponse aux incidents, gestion des vulnérabilités, et déploiement de solutions SIEM, EDR, pare-feu nouvelle génération, NAC, PAM et DLP.",
+          }
+        ),
+        photo: clementPhoto,
+        email: null,
+        linkedin: null,
+      },
+      {
+        id: 3,
+        name: "Amit Singh",
+        role: t("about.team.members.amit.role", {
+          defaultValue:
+            "Consultant Senior – Revenue Assurance & Fraud Management (RAFM)",
+        }),
+        description: t(
+          "about.team.members.amit.description",
+          {
+            defaultValue:
+              "Leader stratégique fort de plus de 17 ans d'expérience internationale en Afrique, au Moyen-Orient, en Asie du Sud et en Asie du Sud-Est dans les domaines de l'Assurance Revenus, la Gestion de la Fraude, le Risque Mobile Money et la Conformité Réglementaire, au service d'opérateurs télécoms, de régulateurs et d'institutions fintech de premier plan. Expertise reconnue dans la mise en place de cadres RAFM, le renforcement de la gouvernance, l'optimisation des contrôles antifraude, l'appui à la prise de décision des directions générales et la protection de flux de revenus de plusieurs millions de dollars, avec un solide parcours de management d'équipes, d'alignement réglementaire et de déploiement de plateformes RAFM avancées sur les écosystèmes GSM, services numériques et mobile money.",
+          }
+        ),
+        photo: amitPhoto,
+        email: null,
+        linkedin: null,
+      },
+      {
+        id: 4,
+        name: "Didier Mingueyambaye",
+        role: t("about.team.members.didier.role", {
+          defaultValue:
+            "Consultant Senior – Ingénieur Travaux Réseaux & Systèmes Informatiques",
+        }),
+        description: t(
+          "about.team.members.didier.description",
+          {
+            defaultValue:
+              "Expert en déploiement d'infrastructures IT, maîtrisant les réseaux LAN/WAN/SD-WAN, la virtualisation et l'administration Windows/Linux. Certifié CCNA et formé à ITIL 4, il conjugue expertise technique et pilotage de projets pour des infrastructures fiables et performantes.",
+          }
+        ),
+        photo: didierPhoto,
+        email: null,
+        linkedin: null,
+      },
+      {
+        id: 5,
         name: "Amina Ngarambe",
         role: t("about.team.members.amina.role", {
           defaultValue:
@@ -458,7 +514,7 @@
         linkedin: null,
       },
       {
-        id: 3,
+        id: 6,
         name: "Alain Mahamat",
         role: t("about.team.members.alain.role", {
           defaultValue:
@@ -476,7 +532,7 @@
         linkedin: null,
       },
       {
-        id: 4,
+        id: 7,
         name: "Nadège Kaboré",
         role: t("about.team.members.nadege.role", {
           defaultValue:
@@ -1034,11 +1090,7 @@
                   </div>
 
                     <div className="p-6">
-                      <p className="leading-relaxed text-gray-600 dark:text-gray-300">
-                        {
-                          member.description
-                        }
-                      </p>
+                      <ExpandableText text={member.description} />
 
                       {(member.email ||
                         member.linkedin) && (
@@ -1255,6 +1307,33 @@
             </div>
           </div>
         </section>
+      </div>
+    );
+  }
+
+  function ExpandableText({ text }) {
+    const { t } = useTranslation();
+    const [expanded, setExpanded] = useState(false);
+
+    return (
+      <div>
+        <p
+          className={`leading-relaxed text-gray-600 dark:text-gray-300 ${
+            expanded ? "" : "line-clamp-4"
+          }`}
+        >
+          {text}
+        </p>
+
+        <button
+          type="button"
+          onClick={() => setExpanded((prev) => !prev)}
+          className="mt-2 text-sm font-semibold text-dbsOrange hover:underline"
+        >
+          {expanded
+            ? t("about.readLess", { defaultValue: "Lire moins" })
+            : t("about.readMore", { defaultValue: "Lire plus" })}
+        </button>
       </div>
     );
   }

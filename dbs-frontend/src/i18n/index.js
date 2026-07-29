@@ -106,6 +106,8 @@ const resources = {
         rights: "Tous droits réservés.",
         designed:
           "Conçu pour la transformation digitale et la croissance des entreprises.",
+        aboutDescription:
+          "DBS Africa accompagne les organisations publiques, privées et humanitaires en Afrique dans leur transformation digitale, en combinant expertise data, ingénierie logicielle et infrastructures IT pour transformer les données en décisions et les idées en impact durable.",
       },
 
       visual: {
@@ -318,6 +320,8 @@ const resources = {
         teamTitle: "Notre équipe",
         teamDescription:
           "Une équipe multidisciplinaire réunissant expertise technologique, connaissance métier et engagement au service de la transformation digitale en Afrique.",
+        readMore: "Lire plus",
+        readLess: "Lire moins",
 
         team: {
           members: {
@@ -344,6 +348,23 @@ const resources = {
                 "Consultant – Directeur des Systèmes d'Information (DSI)",
               description:
                 "Professionnel de l'information et de la donnée avec plus de 16 ans d'expérience en contextes humanitaires et développement : gouvernance des données, analyse avancée et conception de solutions digitales au service de la décision et de l'impact terrain.",
+            },
+            clement: {
+              role: "Consultant – Responsable Cybersécurité",
+              description:
+                "Ingénieur en cybersécurité avec plus de 4 ans d'expérience dans la protection des systèmes d'information : gouvernance de la sécurité, détection et réponse aux incidents, gestion des vulnérabilités, et déploiement de solutions SIEM, EDR, pare-feu nouvelle génération, NAC, PAM et DLP.",
+            },
+            didier: {
+              role:
+                "Consultant Senior – Ingénieur Travaux Réseaux & Systèmes Informatiques",
+              description:
+                "Expert en déploiement d'infrastructures IT, maîtrisant les réseaux LAN/WAN/SD-WAN, la virtualisation et l'administration Windows/Linux. Certifié CCNA et formé à ITIL 4, il conjugue expertise technique et pilotage de projets pour des infrastructures fiables et performantes.",
+            },
+            amit: {
+              role:
+                "Consultant Senior – Revenue Assurance & Fraud Management (RAFM)",
+              description:
+                "Leader stratégique fort de plus de 17 ans d'expérience internationale en Afrique, au Moyen-Orient, en Asie du Sud et en Asie du Sud-Est dans les domaines de l'Assurance Revenus, la Gestion de la Fraude, le Risque Mobile Money et la Conformité Réglementaire, au service d'opérateurs télécoms, de régulateurs et d'institutions fintech de premier plan. Expertise reconnue dans la mise en place de cadres RAFM, le renforcement de la gouvernance, l'optimisation des contrôles antifraude, l'appui à la prise de décision des directions générales et la protection de flux de revenus de plusieurs millions de dollars, avec un solide parcours de management d'équipes, d'alignement réglementaire et de déploiement de plateformes RAFM avancées sur les écosystèmes GSM, services numériques et mobile money.",
             },
           },
         },
@@ -1445,6 +1466,8 @@ const resources = {
         navigation: "Navigation",
         rights: "All rights reserved.",
         designed: "Designed for digital transformation and business growth.",
+        aboutDescription:
+          "DBS Africa supports public, private and humanitarian organisations across Africa in their digital transformation, combining data expertise, software engineering and IT infrastructure to turn data into decisions and ideas into lasting impact.",
       },
 
       visual: {
@@ -1665,6 +1688,8 @@ const resources = {
         teamTitle: "Our team",
         teamDescription:
           "A multidisciplinary team combining technological expertise, business knowledge and a strong commitment to Africa’s digital transformation.",
+        readMore: "Read more",
+        readLess: "Read less",
 
         team: {
           members: {
@@ -1691,6 +1716,23 @@ const resources = {
                 "Consultant – Chief Information Officer (CIO)",
               description:
                 "Information and data professional with over 16 years of experience in humanitarian and development contexts: data governance, advanced analytics and digital solution design in support of decision-making and field impact.",
+            },
+            clement: {
+              role: "Consultant – Head of Cybersecurity",
+              description:
+                "Cybersecurity engineer with over 4 years of experience protecting information systems: security governance, incident detection and response, vulnerability management, and deployment of SIEM, EDR, next-generation firewall, NAC, PAM and DLP solutions.",
+            },
+            didier: {
+              role:
+                "Senior Consultant – Network & IT Systems Engineer",
+              description:
+                "Expert in IT infrastructure deployment, skilled in LAN/WAN/SD-WAN networks, virtualisation and Windows/Linux administration. CCNA certified and ITIL 4 trained, he combines technical expertise with project leadership to deliver reliable, high-performing infrastructure.",
+            },
+            amit: {
+              role:
+                "Senior Consultant – Revenue Assurance & Fraud Management (RAFM)",
+              description:
+                "Strategic leader with over 17 years of global experience across Africa, the Middle East, South Asia and Southeast Asia in Revenue Assurance, Fraud Management, Mobile Money Risk and Regulatory Compliance for leading telecom operators, regulators and fintech institutions. Proven expertise in establishing RAFM frameworks, strengthening governance, optimising fraud controls, supporting C-level decision-making and safeguarding multi-million-dollar revenue streams, with a strong record of leading teams, driving regulatory alignment and implementing advanced RAFM platforms across GSM, digital services and mobile money ecosystems.",
             },
           },
         },
