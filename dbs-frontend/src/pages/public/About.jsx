@@ -1328,6 +1328,7 @@
         <button
           type="button"
           onClick={() => setExpanded((prev) => !prev)}
+          aria-expanded={expanded}
           className="mt-2 text-sm font-semibold text-dbsOrange hover:underline"
         >
           {expanded

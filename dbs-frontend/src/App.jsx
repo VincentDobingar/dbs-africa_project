@@ -16,24 +16,28 @@ import ErrorBoundary from "./shared/components/ErrorBoundary";
 import RouteLoader from "./shared/components/RouteLoader";
 
 /* PUBLIC PAGES */
+/* Home stays eager: it's the most common landing page, so it should
+   render without an extra network round-trip/loading flash. Every
+   other public page is lazy-loaded to keep the initial bundle small. */
 import Home from "./pages/public/Home";
-import About from "./pages/public/About";
-import Expertise from "./pages/public/Expertise";
-import Industries from "./pages/public/Industries";
-import Solutions from "./pages/public/Solutions";
-import Technologies from "./pages/public/Technologies";
-import Portfolio from "./pages/public/Portfolio";
-import Certifications from "./pages/public/Certifications";
-import Careers from "./pages/public/Careers";
-import Blog from "./pages/public/Blog";
-import Contact from "./pages/public/Contact";
-import QuoteRequest from "./pages/public/QuoteRequest";
-import NotFound from "./pages/public/NotFound";
 
-/* PRICING (lazy: pulls in the pricing module + recharts-adjacent data) */
+const About = lazy(() => import("./pages/public/About"));
+const Expertise = lazy(() => import("./pages/public/Expertise"));
+const Industries = lazy(() => import("./pages/public/Industries"));
+const Solutions = lazy(() => import("./pages/public/Solutions"));
+const Technologies = lazy(() => import("./pages/public/Technologies"));
+const Portfolio = lazy(() => import("./pages/public/Portfolio"));
+const Certifications = lazy(() => import("./pages/public/Certifications"));
+const Careers = lazy(() => import("./pages/public/Careers"));
+const Blog = lazy(() => import("./pages/public/Blog"));
+const Contact = lazy(() => import("./pages/public/Contact"));
+const QuoteRequest = lazy(() => import("./pages/public/QuoteRequest"));
+const NotFound = lazy(() => import("./pages/public/NotFound"));
+
+/* PRICING (lazy: not needed by public visitors browsing other pages) */
 const PricingPage = lazy(() => import("./pages/public/PricingPage"));
 
-/* ADMIN (lazy: not needed by public visitors, pulls in recharts) */
+/* ADMIN (lazy: not needed by public visitors) */
 const Login = lazy(() => import("./pages/admin/Login"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
 const Messages = lazy(() => import("./pages/admin/Messages"));

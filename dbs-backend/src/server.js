@@ -53,6 +53,12 @@ const partnerRoutes = require(
 
 const app = express();
 
+// Le backend tourne derrière un reverse proxy en production (Apache/
+// Passenger sur cPanel). "1" indique à Express de faire confiance au
+// premier hop uniquement, pour que req.ip (utilisé par express-rate-limit)
+// reflète la vraie IP du client plutôt que celle du proxy.
+app.set("trust proxy", 1);
+
 // ============================================================
 // CONFIGURATION CORS
 // ============================================================
@@ -160,7 +166,11 @@ app.use(
 app.use(cors(corsOptions));
 
 // Journalisation des requêtes HTTP
-app.use(morgan("dev"));
+app.use(
+  morgan(
+    process.env.NODE_ENV === "production" ? "combined" : "dev"
+  )
+);
 
 // Lecture des requêtes JSON
 app.use(

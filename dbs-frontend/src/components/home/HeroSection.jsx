@@ -146,6 +146,7 @@ export default function HeroSection() {
                 href="https://linkedin.com/in/dobingarvincent"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="LinkedIn"
                 className="flex h-12 w-12 items-center justify-center rounded-full border border-white/50 bg-white/10 text-white backdrop-blur transition hover:border-dbsOrange hover:bg-dbsOrange"
               >
                 <FaLinkedinIn size={22} />
@@ -155,6 +156,7 @@ export default function HeroSection() {
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="GitHub"
                 className="flex h-12 w-12 items-center justify-center rounded-full border border-white/50 bg-white/10 text-white backdrop-blur transition hover:border-dbsOrange hover:bg-dbsOrange"
               >
                 <FaGithub size={22} />
@@ -164,6 +166,7 @@ export default function HeroSection() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Facebook"
                 className="flex h-12 w-12 items-center justify-center rounded-full border border-white/50 bg-white/10 text-white backdrop-blur transition hover:border-dbsOrange hover:bg-dbsOrange"
               >
                 <FaFacebookF size={22} />
@@ -173,6 +176,7 @@ export default function HeroSection() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Instagram"
                 className="flex h-12 w-12 items-center justify-center rounded-full border border-white/50 bg-white/10 text-white backdrop-blur transition hover:border-dbsOrange hover:bg-dbsOrange"
               >
                 <FaInstagram size={22} />
@@ -182,6 +186,7 @@ export default function HeroSection() {
                 href="https://wa.me/25762500305"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="WhatsApp"
                 className="flex h-12 w-12 items-center justify-center rounded-full border border-white/50 bg-white/10 text-white backdrop-blur transition hover:border-dbsOrange hover:bg-dbsOrange"
               >
                 <FaWhatsapp size={22} />
