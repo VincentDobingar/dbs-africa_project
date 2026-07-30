@@ -22,6 +22,9 @@ import RouteLoader from "./shared/components/RouteLoader";
 import Home from "./pages/public/Home";
 
 const About = lazy(() => import("./pages/public/About"));
+const TeamMemberProfile = lazy(() =>
+  import("./pages/public/TeamMemberProfile")
+);
 const Expertise = lazy(() => import("./pages/public/Expertise"));
 const Industries = lazy(() => import("./pages/public/Industries"));
 const Solutions = lazy(() => import("./pages/public/Solutions"));
@@ -133,6 +136,11 @@ export default function App() {
             <Route
               path="/about"
               element={<About />}
+            />
+
+            <Route
+              path="/equipe/:slug"
+              element={<TeamMemberProfile />}
             />
 
             <Route

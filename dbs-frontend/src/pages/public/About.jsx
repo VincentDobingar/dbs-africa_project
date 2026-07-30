@@ -55,13 +55,7 @@
   import HeroSection from "../../shared/components/HeroSection";
   import Seo from "../../shared/components/Seo";
 
-  import aminaPhoto from "../../assets/team/amina-ngarambe.jpg";
-  import alainPhoto from "../../assets/team/alain-mahamat.jpg";
-  import nadegePhoto from "../../assets/team/nadege-kabore.jpg";
-  import abdoulayePhoto from "../../assets/team/abdoulaye-barthelemy.jpg";
-  import clementPhoto from "../../assets/team/webba-clement.jpg";
-  import didierPhoto from "../../assets/team/didier-mingue.jpg";
-  import amitPhoto from "../../assets/team/amit-singh.jpg";
+  import { teamMembers, getInitials } from "../../data/teamData";
 
   export default function About() {
     const {
@@ -418,148 +412,6 @@
       showAllTech
         ? technologies
         : technologies.slice(0, 6);
-
-    // ============================================================
-    // ÉQUIPE 
-    // ============================================================
-
-    const teamMembers = [
-      {
-        id: 1,
-        name: "Abdoulaye Barthelemy",
-        role: t("about.team.members.abdoulaye.role", {
-          defaultValue:
-            "Consultant – Directeur des Systèmes d'Information (DSI)",
-        }),
-        description: t(
-          "about.team.members.abdoulaye.description",
-          {
-            defaultValue:
-              "Professionnel de l'information et de la donnée avec plus de 16 ans d'expérience en contextes humanitaires et développement : gouvernance des données, analyse avancée et conception de solutions digitales au service de la décision et de l'impact terrain.",
-          }
-        ),
-        photo: abdoulayePhoto,
-        email: null,
-        linkedin: null,
-      },
-      {
-        id: 2,
-        name: "Clément Woueba",
-        role: t("about.team.members.clement.role", {
-          defaultValue: "Consultant – Responsable Cybersécurité",
-        }),
-        description: t(
-          "about.team.members.clement.description",
-          {
-            defaultValue:
-              "Ingénieur en cybersécurité avec plus de 4 ans d'expérience dans la protection des systèmes d'information : gouvernance de la sécurité, détection et réponse aux incidents, gestion des vulnérabilités, et déploiement de solutions SIEM, EDR, pare-feu nouvelle génération, NAC, PAM et DLP.",
-          }
-        ),
-        photo: clementPhoto,
-        email: null,
-        linkedin: null,
-      },
-      {
-        id: 3,
-        name: "Amit Singh",
-        role: t("about.team.members.amit.role", {
-          defaultValue:
-            "Consultant Senior – Revenue Assurance & Fraud Management (RAFM)",
-        }),
-        description: t(
-          "about.team.members.amit.description",
-          {
-            defaultValue:
-              "Leader stratégique fort de plus de 17 ans d'expérience internationale en Afrique, au Moyen-Orient, en Asie du Sud et en Asie du Sud-Est dans les domaines de l'Assurance Revenus, la Gestion de la Fraude, le Risque Mobile Money et la Conformité Réglementaire, au service d'opérateurs télécoms, de régulateurs et d'institutions fintech de premier plan. Expertise reconnue dans la mise en place de cadres RAFM, le renforcement de la gouvernance, l'optimisation des contrôles antifraude, l'appui à la prise de décision des directions générales et la protection de flux de revenus de plusieurs millions de dollars, avec un solide parcours de management d'équipes, d'alignement réglementaire et de déploiement de plateformes RAFM avancées sur les écosystèmes GSM, services numériques et mobile money.",
-          }
-        ),
-        photo: amitPhoto,
-        email: null,
-        linkedin: null,
-      },
-      {
-        id: 4,
-        name: "Didier Mingueyambaye",
-        role: t("about.team.members.didier.role", {
-          defaultValue:
-            "Consultant Senior – Ingénieur Travaux Réseaux & Systèmes Informatiques",
-        }),
-        description: t(
-          "about.team.members.didier.description",
-          {
-            defaultValue:
-              "Expert en déploiement d'infrastructures IT, maîtrisant les réseaux LAN/WAN/SD-WAN, la virtualisation et l'administration Windows/Linux. Certifié CCNA et formé à ITIL 4, il conjugue expertise technique et pilotage de projets pour des infrastructures fiables et performantes.",
-          }
-        ),
-        photo: didierPhoto,
-        email: null,
-        linkedin: null,
-      },
-      {
-        id: 5,
-        name: "Amina Ngarambe",
-        role: t("about.team.members.amina.role", {
-          defaultValue:
-            "Responsable Data Analytics & Business Intelligence",
-        }),
-        description: t(
-          "about.team.members.amina.description",
-          {
-            defaultValue:
-              "Spécialiste en analyse de données, conception de tableaux de bord, automatisation du reporting et accompagnement à la prise de décision.",
-          }
-        ),
-        photo: aminaPhoto,
-        email: null,
-        linkedin: null,
-      },
-      {
-        id: 6,
-        name: "Alain Mahamat",
-        role: t("about.team.members.alain.role", {
-          defaultValue:
-            "Lead Développement Web & Applications",
-        }),
-        description: t(
-          "about.team.members.alain.description",
-          {
-            defaultValue:
-              "Développeur full-stack spécialisé dans la conception de plateformes web, d’applications métiers, d’API sécurisées et de solutions digitales évolutives.",
-          }
-        ),
-        photo: alainPhoto,
-        email: null,
-        linkedin: null,
-      },
-      {
-        id: 7,
-        name: "Nadège Kaboré",
-        role: t("about.team.members.nadege.role", {
-          defaultValue:
-            "Responsable Marketing Digital & Partenariats",
-        }),
-        description: t(
-          "about.team.members.nadege.description",
-          {
-            defaultValue:
-              "Professionnelle du marketing digital, de la prospection commerciale, de l’acquisition client et du développement de partenariats stratégiques.",
-          }
-        ),
-        photo: nadegePhoto,
-        email: null,
-        linkedin: null,
-      },
-    ];
-
-    const getInitials = (name) => {
-      return name
-        .split(" ")
-        .map((part) => part[0])
-        .filter(Boolean)
-        .slice(0, 2)
-        .join("")
-        .toUpperCase();
-    };
 
     return (
       <div>
@@ -1043,7 +895,16 @@
 
             <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
               {teamMembers.map(
-                (member) => (
+                (member) => {
+                  const role = t(member.roleKey, {
+                    defaultValue: member.roleDefault,
+                  });
+                  const description = t(
+                    member.descriptionKey,
+                    { defaultValue: member.descriptionDefault }
+                  );
+
+                  return (
                   <motion.article
                     key={member.id}
                     initial={{
@@ -1060,7 +921,10 @@
                     className="group overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900"
                   >
 
-                  <div className="relative h-72 overflow-hidden bg-dbsDark">
+                  <Link
+                    to={`/equipe/${member.slug}`}
+                    className="relative block h-72 overflow-hidden bg-dbsDark"
+                  >
                     {member.photo ? (
                       <img
                         src={member.photo}
@@ -1084,13 +948,22 @@
                       </h3>
 
                       <p className="mt-1 text-sm font-semibold text-dbsOrange">
-                        {member.role}
+                        {role}
                       </p>
                     </div>
-                  </div>
+                  </Link>
 
                     <div className="p-6">
-                      <ExpandableText text={member.description} />
+                      <ExpandableText text={description} />
+
+                      <Link
+                        to={`/equipe/${member.slug}`}
+                        className="mt-4 inline-block text-sm font-semibold text-dbsOrange hover:underline"
+                      >
+                        {t("about.team.viewProfile", {
+                          defaultValue: "Voir le profil →",
+                        })}
+                      </Link>
 
                       {(member.email ||
                         member.linkedin) && (
@@ -1124,7 +997,8 @@
                       )}
                     </div>
                   </motion.article>
-                )
+                  );
+                }
               )}
             </div>
           </div>

@@ -55,6 +55,19 @@ const resources = {
         contactUs: "Nous contacter",
       },
 
+      teamProfile: {
+        backToTeam: "Retour à l'équipe",
+        aboutLabel: "Profil",
+        portfolioTitle: "Réalisations",
+        portfolioEmpty:
+          "Les réalisations de ce membre seront bientôt disponibles.",
+        notFound: {
+          title: "Membre introuvable",
+          description:
+            "Ce profil n'existe pas ou a été déplacé.",
+        },
+      },
+
       hero: {
         title:
           "Solutions Digitales. Intelligence des Données. Croissance des Entreprises.",
@@ -324,6 +337,7 @@ const resources = {
         readLess: "Lire moins",
 
         team: {
+          viewProfile: "Voir le profil →",
           members: {
             amina: {
               role:
@@ -1418,6 +1432,18 @@ const resources = {
         contactUs: "Contact us",
       },
 
+      teamProfile: {
+        backToTeam: "Back to team",
+        aboutLabel: "Profile",
+        portfolioTitle: "Portfolio",
+        portfolioEmpty:
+          "This member's portfolio will be available soon.",
+        notFound: {
+          title: "Member not found",
+          description: "This profile doesn't exist or has been moved.",
+        },
+      },
+
       hero: {
         title: "Digital Solutions. Data Insights. Business Growth.",
         subtitle: "From Data to Decisions. From Ideas to Impact.",
@@ -1692,6 +1718,7 @@ const resources = {
         readLess: "Read less",
 
         team: {
+          viewProfile: "View profile →",
           members: {
             amina: {
               role:
