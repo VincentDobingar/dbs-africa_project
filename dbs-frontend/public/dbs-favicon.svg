@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 530 454" width="530" height="454">
+  <!-- Left digital blocks -->
+  <rect x="15" y="180" width="42" height="74" rx="6" fill="#8DDA23"/>
+  <rect x="48" y="110" width="42" height="48" rx="6" fill="#1AC6DE"/>
+  <rect x="93" y="145" width="55" height="110" rx="6" fill="#FE5C20"/>
+  <rect x="138" y="100" width="40" height="60" rx="6" fill="#8DDA23"/>
+  <rect x="178" y="210" width="46" height="95" rx="6" fill="#1AC6DE"/>
+  <rect x="192" y="70" width="54" height="54" rx="6" fill="#FE5C20"/>
+  <rect x="226" y="155" width="70" height="100" rx="8" fill="#000000"/>
+
+  <!-- Stylized D -->
+  <path d="M198 28 H310 C405 28 470 93 470 188 C470 283 405 348 310 348 H198 V280 H280 C340 280 382 242 382 188 C382 134 340 96 280 96 H198 Z"
+        fill="#FF6A00"/>
+
+  <!-- Circuit -->
+  <g stroke="#FF6A00" stroke-width="12" stroke-linecap="round" fill="none">
+    <line x1="390" y1="174" x2="475" y2="174"/>
+    <line x1="430" y1="214" x2="510" y2="214"/>
+  </g>
+  <g fill="#FF6A00">
+    <circle cx="390" cy="174" r="18"/>
+    <circle cx="475" cy="174" r="18"/>
+    <circle cx="430" cy="214" r="18"/>
+  </g>
+</svg>
