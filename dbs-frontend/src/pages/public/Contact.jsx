@@ -29,6 +29,13 @@ const INITIAL_FORM_DATA = {
   message: "",
 };
 
+// Délais avant chaque nouvelle tentative en cas d'échec réseau
+// (le backend cPanel peut redémarrer brièvement le processus Node).
+const RETRY_DELAYS_MS = [1000, 2000];
+
+const wait = (ms) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
 export default function Contact() {
   const { t } = useTranslation();
 
@@ -50,6 +57,7 @@ export default function Contact() {
   const [successMessage, setSuccessMessage] =
     useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [retryNotice, setRetryNotice] = useState("");
 
   const contacts = [
     {
@@ -272,10 +280,43 @@ export default function Contact() {
        * la requête finale sera :
        * POST http://localhost:5000/api/contact
        */
-      const response = await api.post(
-        "/contact",
-        payload
-      );
+      let response;
+
+      for (
+        let attempt = 0;
+        attempt <= RETRY_DELAYS_MS.length;
+        attempt += 1
+      ) {
+        try {
+          response = await api.post(
+            "/contact",
+            payload
+          );
+
+          break;
+        } catch (attemptError) {
+          const isNetworkError =
+            !attemptError.response;
+
+          const hasRetriesLeft =
+            attempt < RETRY_DELAYS_MS.length;
+
+          if (!isNetworkError || !hasRetriesLeft) {
+            throw attemptError;
+          }
+
+          setRetryNotice(
+            t("contactPage.retrying", {
+              defaultValue:
+                "Le serveur ne répond pas, nouvelle tentative...",
+            })
+          );
+
+          await wait(RETRY_DELAYS_MS[attempt]);
+        }
+      }
+
+      setRetryNotice("");
 
       if (response.data?.success === false) {
         throw new Error(
@@ -299,12 +340,31 @@ export default function Contact() {
         error
       );
 
+      setRetryNotice("");
+
       if (!error.response) {
         setErrorMessage(
           t("contactPage.errors.serverUnavailable", {
             defaultValue:
-              "Impossible de joindre le serveur. Vérifiez que le backend est démarré.",
+              "Impossible de joindre le serveur. Veuillez vérifier votre connexion et réessayer.",
           })
+        );
+
+        return;
+      }
+
+      const backendErrors =
+        error.response?.data?.errors;
+
+      if (
+        Array.isArray(backendErrors) &&
+        backendErrors.length > 0
+      ) {
+        setErrorMessage(
+          backendErrors
+            .map((item) => item.message)
+            .filter(Boolean)
+            .join(" ")
         );
 
         return;
@@ -572,6 +632,16 @@ export default function Contact() {
               placeholder={t("contactPage.message")}
               required
             />
+
+            {/* NOUVELLE TENTATIVE */}
+            {retryNotice && (
+              <div
+                role="status"
+                className="mt-5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-medium text-amber-700"
+              >
+                {retryNotice}
+              </div>
+            )}
 
             {/* ERREUR */}
             {errorMessage && (

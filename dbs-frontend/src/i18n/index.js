@@ -789,6 +789,8 @@ const resources = {
           serverUnavailable:
             "Impossible de joindre le serveur. Vérifiez que le backend est démarré.",
         },
+        retrying:
+          "Le serveur ne répond pas, nouvelle tentative...",
         subtitle:
           "DBS est prêt à vous accompagner dans vos projets de transformation digitale, data analytics, business intelligence, développement web et télécoms.",
 
@@ -2171,6 +2173,7 @@ const resources = {
           serverUnavailable:
             "Unable to reach the server. Please try again later.",
         },
+        retrying: "Server is not responding, retrying...",
         subtitle:
           "DBS is ready to support your digital transformation, data analytics, business intelligence, web development and telecom projects.",
 
