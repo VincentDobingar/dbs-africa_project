@@ -317,7 +317,7 @@ const resources = {
         finalCtaText:
           "Construisons ensemble des solutions innovantes et transformons vos données en décisions stratégiques.",
         promoter: {
-          label: "Le promoteur",
+          label: "Fondateur & Directeur Général",
           socialLabel: "Retrouvez-moi également sur",
           title: "Une expertise au service de la transformation digitale",
           name: "Dobingar Guiryambaye Vincent",
@@ -379,6 +379,12 @@ const resources = {
                 "Consultant Senior – Revenue Assurance & Fraud Management (RAFM)",
               description:
                 "Leader stratégique fort de plus de 17 ans d'expérience internationale en Afrique, au Moyen-Orient, en Asie du Sud et en Asie du Sud-Est dans les domaines de l'Assurance Revenus, la Gestion de la Fraude, le Risque Mobile Money et la Conformité Réglementaire, au service d'opérateurs télécoms, de régulateurs et d'institutions fintech de premier plan. Expertise reconnue dans la mise en place de cadres RAFM, le renforcement de la gouvernance, l'optimisation des contrôles antifraude, l'appui à la prise de décision des directions générales et la protection de flux de revenus de plusieurs millions de dollars, avec un solide parcours de management d'équipes, d'alignement réglementaire et de déploiement de plateformes RAFM avancées sur les écosystèmes GSM, services numériques et mobile money.",
+            },
+            lema: {
+              role:
+                "Responsable Recherche, Formation et Développement Technologique",
+              description:
+                "Docteur en Mathématiques (option Statistique), data scientist, chercheur et enseignant avec plus de 10 ans d'expérience en machine learning, économétrie, analyse spatiale et analytique de l'enseignement supérieur au sein d'institutions académiques et publiques de premier plan (AIMS, National Institute of Statistics of Rwanda, Higher Education Council du Rwanda, Ministère des Finances du Tchad). Expertise reconnue dans la conception de modèles data-driven, le développement d'applications d'intelligence artificielle et l'encadrement pédagogique, au service de la recherche, de la formation et de l'innovation technologique.",
             },
           },
         },
@@ -676,7 +682,7 @@ const resources = {
               "Application Python interactive (Streamlit) d'analyse de données de marché en Afrique.",
           },
           rDashboard: {
-            title: "Analyse de Données R",
+            title: "Santé Cameroun",
             description:
               "Tableau de bord d'analyse de données développé en R et publié sur Posit Connect.",
           },
@@ -763,6 +769,12 @@ const resources = {
             category: "Analyse de Données",
             description:
               "Centralisation des données terrain, visualisation des indicateurs et génération automatisée des rapports pour les programmes humanitaires."
+          },
+          sahelDisplacement: {
+            title: "Sahel – Déplacement & Sécurité Alimentaire",
+            category: "ONG / Crises humanitaires",
+            description:
+              "Plateforme de suivi des déplacements de population et de la sécurité alimentaire au Mali, au Burkina Faso et au Niger, basée sur les données UNHCR, IDMC, HDX et FAOSTAT, avec tableaux de bord comparatifs et export des données."
           },
               concept: "Solution métier / Concept",
 
@@ -1700,7 +1712,7 @@ const resources = {
         finalCtaText:
           "Let's build innovative solutions together and turn your data into strategic decisions.",
         promoter: {
-          label: "The Founder",
+          label: "Founder & CEO",
           socialLabel: "You can also find me on",
           title: "Expertise Dedicated to Digital Transformation",
           name: "Dobingar Guiryambaye Vincent",
@@ -1762,6 +1774,12 @@ const resources = {
                 "Senior Consultant – Revenue Assurance & Fraud Management (RAFM)",
               description:
                 "Strategic leader with over 17 years of global experience across Africa, the Middle East, South Asia and Southeast Asia in Revenue Assurance, Fraud Management, Mobile Money Risk and Regulatory Compliance for leading telecom operators, regulators and fintech institutions. Proven expertise in establishing RAFM frameworks, strengthening governance, optimising fraud controls, supporting C-level decision-making and safeguarding multi-million-dollar revenue streams, with a strong record of leading teams, driving regulatory alignment and implementing advanced RAFM platforms across GSM, digital services and mobile money ecosystems.",
+            },
+            lema: {
+              role:
+                "Head of Research, Training & Technology Development",
+              description:
+                "PhD in Mathematics (Statistics option), data scientist, researcher and lecturer with over 10 years of experience in machine learning, econometrics, spatial data analysis and higher education analytics across leading academic and public institutions (AIMS, National Institute of Statistics of Rwanda, Rwanda's Higher Education Council, Chad's Ministry of Finance). Proven expertise in designing data-driven models, building artificial intelligence applications and mentoring students, in service of research, training and technology-driven innovation.",
             },
           },
         },
@@ -2059,7 +2077,7 @@ const resources = {
               "Interactive Python (Streamlit) application for African market data analysis.",
           },
           rDashboard: {
-            title: "R Data Dashboard",
+            title: "Cameroon Health",
             description:
               "Data analysis dashboard built in R and published on Posit Connect.",
           },
@@ -2146,6 +2164,12 @@ const resources = {
             category: "Data Analytics",
             description:
               "Centralized field data platform with dashboards, indicators visualization and automated humanitarian reporting."
+          },
+          sahelDisplacement: {
+            title: "Sahel – Displacement & Food Security",
+            category: "NGO / Humanitarian Crises",
+            description:
+              "Platform tracking population displacement and food security across Mali, Burkina Faso and Niger, built on UNHCR, IDMC, HDX and FAOSTAT data, with comparative dashboards and data export."
           },
             concept: "Business Solution / Concept",
 

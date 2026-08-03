@@ -27,6 +27,11 @@ import edenImg from "../../assets/projects/eden.jpg";
 import cdoImg from "../../assets/projects/cdo.jpg";
 import ndofImg from "../../assets/projects/ndof.jpg";
 import maniImg from "../../assets/projects/mani.jpg";
+import antidiscriminationImg from "../../assets/projects/antidiscrimination.jpg";
+import sahelDisplacementImg from "../../assets/projects/anlyse-deplacement.jpg";
+import santeCamerounImg from "../../assets/projects/sante-cameroun.jpg";
+import afriMarketImg from "../../assets/projects/afri-market.jpg";
+import dataLendoRhImg from "../../assets/projects/datalendorh.jpg";
 
 export default function Portfolio() {
   const { t } = useTranslation();
@@ -99,6 +104,7 @@ export default function Portfolio() {
       technologies: ["React", "Node.js", "MySQL", "Tailwind CSS"],
       url: "https://www.antidiscrimination.td/",
       icon: HandHeart,
+      image: antidiscriminationImg,
     },
     {
       title: "M&E Performance Dashboard",
@@ -127,6 +133,16 @@ export default function Portfolio() {
       url: null,
       icon: HandHeart,
     },
+    {
+      title: "Sahel – Déplacement & Sécurité Alimentaire",
+      key: "sahelDisplacement",
+      category: "humanitarian",
+      status: "online",
+      technologies: ["Next.js", "Python", "Power BI"],
+      url: "https://sahel-deplacement-un-r6mf.vercel.app/",
+      icon: HandHeart,
+      image: sahelDisplacementImg,
+    },
 
     // ============ DATA ============
     {
@@ -136,7 +152,8 @@ export default function Portfolio() {
       icon: Database,
       badgeClass:
         "bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300",
-      url: "https://github.com/VincentDobingar/DataLendo-RH",
+      url: "https://site-taupe-nine-66.vercel.app/",
+      image: dataLendoRhImg,
     },
     {
       key: "afriMarket",
@@ -146,10 +163,12 @@ export default function Portfolio() {
       badgeClass:
         "bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-300",
       url: "https://afrimarketprojects.streamlit.app/",
+      image: afriMarketImg,
     },
     {
       key: "rDashboard",
       category: "data",
+      image: santeCamerounImg,
       language: "R",
       icon: LineChart,
       badgeClass:
