@@ -19,33 +19,15 @@ require("./config/db");
 // IMPORTATION DES ROUTES
 // ============================================================
 
-const contactRoutes = require(
-  "./routes/contactRoutes"
-);
-
-const quoteRoutes = require(
-  "./routes/quoteRoutes"
-);
-
-const authRoutes = require(
-  "./routes/authRoutes"
-);
-
-const adminRoutes = require(
-  "./routes/adminRoutes"
-);
-
-const blogPostRoutes = require(
-  "./routes/blogPostRoutes"
-);
-
-const projectRoutes = require(
-  "./routes/projectRoutes"
-);
-
-const partnerRoutes = require(
-  "./routes/partnerRoutes"
-);
+const contactRoutes = require("./routes/contactRoutes");
+const quoteRoutes = require("./routes/quoteRoutes");
+const authRoutes = require("./routes/authRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+const blogPostRoutes = require("./routes/blogPostRoutes");
+const projectRoutes = require("./routes/projectRoutes");
+const partnerRoutes = require("./routes/partnerRoutes");
+const pricingRoutes = require("./routes/pricingRoutes");
+const geoRoutes = require("./routes/geoRoutes");
 
 // ============================================================
 // INITIALISATION EXPRESS
@@ -53,10 +35,11 @@ const partnerRoutes = require(
 
 const app = express();
 
-// Le backend tourne derrière un reverse proxy en production (Apache/
-// Passenger sur cPanel). "1" indique à Express de faire confiance au
-// premier hop uniquement, pour que req.ip (utilisé par express-rate-limit)
-// reflète la vraie IP du client plutôt que celle du proxy.
+/*
+ * Le backend tourne derrière Apache/Passenger sur cPanel.
+ * Cette configuration permet à Express de reconnaître correctement
+ * le protocole HTTPS et l’adresse IP réelle du client.
+ */
 app.set("trust proxy", 1);
 
 // ============================================================
@@ -66,6 +49,8 @@ app.set("trust proxy", 1);
 const defaultOrigins = [
   "http://localhost:5173",
   "http://127.0.0.1:5173",
+  "https://dbs-africa.org",
+  "https://www.dbs-africa.org",
 ];
 
 const environmentOrigins = (
@@ -82,37 +67,25 @@ const allowedOrigins = [
     ...defaultOrigins,
     ...environmentOrigins,
   ]),
-].map((origin) =>
-  origin.replace(/\/+$/, "")
-);
+].map((origin) => origin.replace(/\/+$/, ""));
 
 const corsOptions = {
   origin(origin, callback) {
     /*
-     * Une requête sans Origin peut provenir de :
-     * - PowerShell ;
-     * - Postman ;
-     * - curl ;
-     * - un service backend.
+     * Les requêtes provenant de curl, Postman, PowerShell
+     * ou d’autres services backend peuvent ne pas avoir Origin.
      */
     if (!origin) {
       return callback(null, true);
     }
 
-    const normalizedOrigin =
-      origin.replace(/\/+$/, "");
+    const normalizedOrigin = origin.replace(/\/+$/, "");
 
-    if (
-      allowedOrigins.includes(
-        normalizedOrigin
-      )
-    ) {
+    if (allowedOrigins.includes(normalizedOrigin)) {
       return callback(null, true);
     }
 
-    console.warn(
-      `⚠️ Origine CORS refusée : ${origin}`
-    );
+    console.warn(`⚠️ Origine CORS refusée : ${origin}`);
 
     const corsError = new Error(
       "Origine non autorisée par la politique CORS."
@@ -145,16 +118,23 @@ const corsOptions = {
   ],
 
   credentials: true,
-
   optionsSuccessStatus: 204,
-
   maxAge: 86400,
 };
 
 // ============================================================
-// MIDDLEWARES DE SÉCURITÉ
+// MIDDLEWARES GLOBAUX
 // ============================================================
 
+// CORS doit être placé avant les routes
+app.use(cors(corsOptions));
+
+/*
+ * Il n’est pas nécessaire d’ajouter app.options("*", ...).
+ * Le middleware CORS répond déjà automatiquement aux requêtes OPTIONS.
+ */
+
+// Sécurité HTTP
 app.use(
   helmet({
     crossOriginResourcePolicy: {
@@ -163,12 +143,12 @@ app.use(
   })
 );
 
-app.use(cors(corsOptions));
-
-// Journalisation des requêtes HTTP
+// Journalisation HTTP
 app.use(
   morgan(
-    process.env.NODE_ENV === "production" ? "combined" : "dev"
+    process.env.NODE_ENV === "production"
+      ? "combined"
+      : "dev"
   )
 );
 
@@ -187,6 +167,14 @@ app.use(
   })
 );
 
+/*
+ * Ne pas ajouter de redirection HTTPS dans Express.
+ * HTTPS est déjà géré par Apache/cPanel.
+ *
+ * Une redirection ici pourrait produire un code 307 ou 308
+ * sans les bons en-têtes CORS.
+ */
+
 // ============================================================
 // FICHIERS STATIQUES
 // ============================================================
@@ -198,22 +186,19 @@ const uploadsDirectory = path.join(
 
 app.use(
   "/uploads",
-  express.static(
-    uploadsDirectory,
-    {
-      setHeaders(response) {
-        response.setHeader(
-          "Cross-Origin-Resource-Policy",
-          "cross-origin"
-        );
+  express.static(uploadsDirectory, {
+    setHeaders(response) {
+      response.setHeader(
+        "Cross-Origin-Resource-Policy",
+        "cross-origin"
+      );
 
-        response.setHeader(
-          "Access-Control-Allow-Origin",
-          "*"
-        );
-      },
-    }
-  )
+      response.setHeader(
+        "Access-Control-Allow-Origin",
+        "*"
+      );
+    },
+  })
 );
 
 // ============================================================
@@ -223,8 +208,7 @@ app.use(
 app.get("/", (req, res) => {
   return res.json({
     success: true,
-    message:
-      "API DBS Africa opérationnelle",
+    message: "API DBS Africa opérationnelle",
   });
 });
 
@@ -233,10 +217,8 @@ app.get("/health", (req, res) => {
     success: true,
     status: "OK",
     environment:
-      process.env.NODE_ENV ||
-      "development",
-    timestamp:
-      new Date().toISOString(),
+      process.env.NODE_ENV || "development",
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -244,40 +226,15 @@ app.get("/health", (req, res) => {
 // ROUTES API
 // ============================================================
 
-app.use(
-  "/api/contact",
-  contactRoutes
-);
-
-app.use(
-  "/api/quotes",
-  quoteRoutes
-);
-
-app.use(
-  "/api/auth",
-  authRoutes
-);
-
-app.use(
-  "/api/admin",
-  adminRoutes
-);
-
-app.use(
-  "/api/blog-posts",
-  blogPostRoutes
-);
-
-app.use(
-  "/api/projects",
-  projectRoutes
-);
-
-app.use(
-  "/api/partners",
-  partnerRoutes
-);
+app.use("/api/contact", contactRoutes);
+app.use("/api/quotes", quoteRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/blog-posts", blogPostRoutes);
+app.use("/api/projects", projectRoutes);
+app.use("/api/partners", partnerRoutes);
+app.use("/api/pricing", pricingRoutes);
+app.use("/api/geo", geoRoutes);
 
 // ============================================================
 // ROUTE INTROUVABLE
@@ -295,62 +252,47 @@ app.use((req, res) => {
 // GESTION GLOBALE DES ERREURS
 // ============================================================
 
-app.use(
-  (
-    error,
-    req,
-    res,
-    next
-  ) => {
-    console.error(
-      "❌ Erreur serveur :",
-      error
-    );
+app.use((error, req, res, next) => {
+  console.error("❌ Erreur serveur :", error);
 
-    if (res.headersSent) {
-      return next(error);
-    }
-
-    const status =
-      error.status ||
-      error.statusCode ||
-      500;
-
-    return res.status(status).json({
-      success: false,
-      message:
-        status === 500
-          ? "Une erreur interne est survenue."
-          : error.message,
-    });
+  if (res.headersSent) {
+    return next(error);
   }
-);
+
+  const status =
+    error.status ||
+    error.statusCode ||
+    500;
+
+  return res.status(status).json({
+    success: false,
+    message:
+      status === 500
+        ? "Une erreur interne est survenue."
+        : error.message,
+  });
+});
 
 // ============================================================
 // DÉMARRAGE DU SERVEUR
 // ============================================================
 
-const PORT =
-  Number(process.env.PORT) ||
-  5000;
+const PORT = Number(process.env.PORT) || 5000;
 
-const server = app.listen(
-  PORT,
-  () => {
-    console.log(
-      `✅ API DBS Africa démarrée sur http://localhost:${PORT}`
-    );
+const server = app.listen(PORT, () => {
+  console.log(
+    `✅ API DBS Africa démarrée sur le port ${PORT}`
+  );
 
-    console.log(
-      "✅ Origines CORS autorisées :",
-      allowedOrigins
-    );
+  console.log(
+    "✅ Origines CORS autorisées :",
+    allowedOrigins
+  );
 
-    console.log(
-      `✅ Répertoire uploads : ${uploadsDirectory}`
-    );
-  }
-);
+  console.log(
+    `✅ Répertoire uploads : ${uploadsDirectory}`
+  );
+});
 
 // ============================================================
 // ARRÊT PROPRE DU SERVEUR
@@ -362,10 +304,7 @@ const shutdown = (signal) => {
   );
 
   server.close(() => {
-    console.log(
-      "✅ Serveur HTTP arrêté."
-    );
-
+    console.log("✅ Serveur HTTP arrêté.");
     process.exit(0);
   });
 };
