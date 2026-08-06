@@ -1,13 +1,18 @@
 // src/pricing/components/PriceDisplay.jsx
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { usePricing } from "../context/PricingContext";
 
 export default function PriceDisplay({
-  amount,
+  min,
+  max,
   currency: baseCurrency = "FCFA",
   className = "",
 }) {
+
+  const { i18n } = useTranslation();
+  const lang = i18n.language || "fr";
 
   const {
     currency,
@@ -16,19 +21,12 @@ export default function PriceDisplay({
 
 
   if (
-    amount === null ||
-    amount === undefined ||
-    isNaN(amount)
+    min === null ||
+    min === undefined ||
+    isNaN(min)
   ) {
     return null;
   }
-
-
-  const convertedAmount = convertPrice(
-    amount,
-    baseCurrency,
-    currency
-  );
 
 
   const formatters = {
@@ -63,23 +61,43 @@ export default function PriceDisplay({
   };
 
 
-  let formatted =
-    (
-      formatters[currency] ||
-      formatters.FCFA
-    ).format(convertedAmount);
+  const formatAmount = (value) => {
+    const convertedAmount = convertPrice(
+      value,
+      baseCurrency,
+      currency
+    );
+
+    let formatted =
+      (
+        formatters[currency] ||
+        formatters.FCFA
+      ).format(convertedAmount);
+
+    // Format spécifique FCFA DBS-Africa
+    if (currency === "FCFA") {
+      formatted = `${formatted} F CFA`;
+    }
+
+    return formatted;
+  };
 
 
+  const hasMax = max !== null && max !== undefined && !isNaN(max);
 
-  // Format spécifique FCFA DBS-Africa
-  if (currency === "FCFA") {
-    formatted = `${formatted} F CFA`;
+  if (!hasMax) {
+    const prefix = lang === "fr" ? "À partir de" : "From";
+
+    return (
+      <span className={className}>
+        {prefix} {formatAmount(min)}
+      </span>
+    );
   }
-
 
   return (
     <span className={className}>
-      {formatted}
+      {formatAmount(min)} – {formatAmount(max)}
     </span>
   );
 }

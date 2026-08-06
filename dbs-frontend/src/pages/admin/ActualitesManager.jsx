@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 export default function ActualitesManager() {
+  const token = localStorage.getItem("dbs_admin_token");
+
   const [posts, setPosts] = useState([]);
   const [editingPost, setEditingPost] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -98,6 +100,9 @@ export default function ActualitesManager() {
 
     const res = await fetch(url, {
       method,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       body: formData,
     });
 
@@ -116,6 +121,9 @@ export default function ActualitesManager() {
 
     const res = await fetch(`${API_URL}/blog-posts/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     if (res.ok) fetchPosts();

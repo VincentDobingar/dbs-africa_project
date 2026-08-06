@@ -3,12 +3,15 @@
 import React from "react";
 import { CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export default function PricingCTA() {
 
   const { i18n } = useTranslation();
 
   const lang = i18n.language || "fr";
+
+  const navigate = useNavigate();
 
 
   return (
@@ -59,7 +62,10 @@ export default function PricingCTA() {
 
 
 
-        <button className="pricing-cta-button">
+        <button
+          className="pricing-cta-button"
+          onClick={() => navigate("/quote")}
+        >
 
           {lang === "fr"
             ? "Demander un devis"

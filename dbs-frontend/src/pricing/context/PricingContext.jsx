@@ -10,8 +10,10 @@ import {
 } from "react";
 
 import useCountry from "../hooks/useCountry";
-import { convertCurrency } from "../services/forex";
+import { convertCurrency, setLiveRate } from "../services/forex";
+import { getLiveUsdToFcfaRate } from "../services/exchangeRates";
 import { DEFAULT_CURRENCY } from "../constants/currencies";
+import api from "../../api/axios";
 
 const PricingContext = createContext(null);
 
@@ -32,6 +34,83 @@ export function PricingProvider({ children }) {
    * son choix manuel.
    */
   const [manualCurrency, setManualCurrency] = useState(false);
+
+  /**
+   * Catalogue pricing (packs + options), chargé depuis l'API plutôt
+   * que codé en dur : `/admin/pricing` peut le modifier sans
+   * déploiement du frontend.
+   */
+  const [plans, setPlans] = useState([]);
+  const [addons, setAddons] = useState([]);
+  const [baseCurrency, setBaseCurrency] = useState(DEFAULT_CURRENCY);
+  const [plansLoading, setPlansLoading] = useState(true);
+  const [plansError, setPlansError] = useState(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    api
+      .get("/pricing")
+      .then((response) => {
+        if (!mounted) {
+          return;
+        }
+
+        const data = response.data?.data;
+
+        setPlans(Array.isArray(data?.plans) ? data.plans : []);
+        setAddons(Array.isArray(data?.addons) ? data.addons : []);
+        setBaseCurrency(data?.baseCurrency || DEFAULT_CURRENCY);
+      })
+      .catch((error) => {
+        if (!mounted) {
+          return;
+        }
+
+        console.warn(
+          "Impossible de charger le catalogue pricing :",
+          error instanceof Error ? error.message : error
+        );
+
+        setPlansError(error);
+      })
+      .finally(() => {
+        if (mounted) {
+          setPlansLoading(false);
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  /**
+   * Incrémenté lorsqu'un taux de change "live" remplace le taux de
+   * secours, pour forcer le recalcul des prix déjà affichés.
+   */
+  const [ratesVersion, setRatesVersion] = useState(0);
+
+  /**
+   * Récupération du taux USD -> FCFA en direct au montage. En cas
+   * d'échec, le taux de secours de `forex.js` reste utilisé.
+   */
+  useEffect(() => {
+    let mounted = true;
+
+    getLiveUsdToFcfaRate().then((rate) => {
+      if (!mounted || !rate) {
+        return;
+      }
+
+      setLiveRate("USD", rate);
+      setRatesVersion((version) => version + 1);
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   /**
    * Vérifie qu’une devise est prise en charge.
@@ -123,7 +202,7 @@ export function PricingProvider({ children }) {
         targetCurrency
       );
     },
-    [currency, isSupportedCurrency]
+    [currency, isSupportedCurrency, ratesVersion]
   );
 
   /**
@@ -194,6 +273,12 @@ export function PricingProvider({ children }) {
 
       manualCurrency,
       supportedCurrencies: SUPPORTED_CURRENCIES,
+
+      plans,
+      addons,
+      baseCurrency,
+      plansLoading,
+      plansError,
     }),
     [
       currency,
@@ -202,6 +287,11 @@ export function PricingProvider({ children }) {
       convertPrice,
       formatPrice,
       manualCurrency,
+      plans,
+      addons,
+      baseCurrency,
+      plansLoading,
+      plansError,
     ]
   );
 

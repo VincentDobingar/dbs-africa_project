@@ -1,5 +1,4 @@
 import React from "react";
-import { pricingData } from "../data/pricingData";
 import PricingCard from "./PricingCard";
 import CurrencyToggle from "./CurrencyToggle";
 import { useTranslation } from "react-i18next";
@@ -10,7 +9,8 @@ export default function Pricing() {
   const { i18n } = useTranslation();
   const lang = i18n.language || "fr";
 
-  const { currency, setCurrency } = usePricing();
+  const { currency, setCurrency, plans, plansLoading, plansError } =
+    usePricing();
 
   return (
     <section className="pricing-container">
@@ -31,14 +31,30 @@ export default function Pricing() {
         />
       </div>
 
-      <div className="pricing-grid">
-        {pricingData.plans.map((plan) => (
-          <PricingCard
-            key={plan.id}
-            plan={plan}
-          />
-        ))}
-      </div>
+      {plansLoading && (
+        <p className="pricing-status">
+          {lang === "fr" ? "Chargement des tarifs…" : "Loading pricing…"}
+        </p>
+      )}
+
+      {!plansLoading && plansError && (
+        <p className="pricing-status pricing-status-error">
+          {lang === "fr"
+            ? "Impossible de charger les tarifs pour le moment. Réessayez plus tard."
+            : "Unable to load pricing right now. Please try again later."}
+        </p>
+      )}
+
+      {!plansLoading && !plansError && (
+        <div className="pricing-grid">
+          {plans.map((plan) => (
+            <PricingCard
+              key={plan.id}
+              plan={plan}
+            />
+          ))}
+        </div>
+      )}
 
     </section>
   );

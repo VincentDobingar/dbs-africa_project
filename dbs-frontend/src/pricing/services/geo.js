@@ -1,5 +1,7 @@
 // src/pricing/services/geo.js
 
+import api from "../../api/axios";
+
 const GEO_CACHE_KEY = "dbs_geo_data";
 const GEO_CACHE_DURATION = 1000 * 60 * 60 * 24; // 24 heures
 
@@ -168,6 +170,11 @@ export function getLanguageByCountry(countryCode) {
 
 /**
  * Requête réelle vers le service de géolocalisation.
+ *
+ * Passe par le relais backend (`/api/geo`, qui interroge ipapi.co
+ * côté serveur) plutôt que d'appeler ce service tiers directement
+ * depuis le navigateur : ça évite d'exposer son quota gratuit à
+ * chaque visiteur et centralise le fallback en cas d'indisponibilité.
  */
 async function requestGeoLocation() {
   const cachedData = getCachedGeoData();
@@ -176,35 +183,19 @@ async function requestGeoLocation() {
     return cachedData;
   }
 
-  const controller = new AbortController();
-
-  const timeoutId = setTimeout(() => {
-    controller.abort();
-  }, 5000);
-
   try {
-    const response = await fetch("https://ipapi.co/json/", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-      },
-      signal: controller.signal,
+    const response = await api.get("/geo", {
+      timeout: 5000,
     });
 
-    if (!response.ok) {
-      throw new Error(
-        `Geo API error: ${response.status} ${response.statusText}`
-      );
-    }
-
-    const data = await response.json();
+    const data = response.data?.data || {};
 
     const countryCode =
-      data.country_code?.toUpperCase() ||
+      data.countryCode?.toUpperCase() ||
       DEFAULT_GEO_DATA.countryCode;
 
     const countryName =
-      data.country_name ||
+      data.country ||
       DEFAULT_GEO_DATA.countryName;
 
     const geoData = {
@@ -212,7 +203,6 @@ async function requestGeoLocation() {
       countryName,
       countryCode,
       continent:
-        data.continent_code ||
         data.continent ||
         DEFAULT_GEO_DATA.continent,
       currency:
@@ -220,7 +210,7 @@ async function requestGeoLocation() {
       language:
         getLanguageByCountry(countryCode),
       callingCode:
-        data.country_calling_code ||
+        data.callingCode ||
         DEFAULT_GEO_DATA.callingCode,
     };
 
@@ -240,8 +230,6 @@ async function requestGeoLocation() {
     setCachedGeoData(DEFAULT_GEO_DATA);
 
     return DEFAULT_GEO_DATA;
-  } finally {
-    clearTimeout(timeoutId);
   }
 }
 

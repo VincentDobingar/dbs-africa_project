@@ -100,6 +100,83 @@ CREATE TABLE projects (
 );
 
 -- ============================================================
+-- MODULE PRICING
+-- Packs affichés sur /pricing, pilotables depuis l'admin. Les
+-- montants sont exprimés en FCFA (devise de base) ; la conversion
+-- USD/EUR se fait côté frontend (voir src/pricing/services/forex.js).
+-- ============================================================
+
+CREATE TABLE pricing_plans (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tier VARCHAR(50) UNIQUE NOT NULL,
+    name_fr VARCHAR(150) NOT NULL,
+    name_en VARCHAR(150) NOT NULL,
+    description_fr TEXT,
+    description_en TEXT,
+    price_min DECIMAL(12,2) NOT NULL,
+    price_max DECIMAL(12,2) NULL,
+    billing VARCHAR(50) DEFAULT 'project',
+    popular BOOLEAN DEFAULT FALSE,
+    display_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE TABLE pricing_plan_features (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    plan_id INT NOT NULL,
+    label_fr VARCHAR(255) NOT NULL,
+    label_en VARCHAR(255) NOT NULL,
+    display_order INT DEFAULT 0,
+    FOREIGN KEY (plan_id) REFERENCES pricing_plans(id) ON DELETE CASCADE
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE TABLE pricing_addons (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    slug VARCHAR(50) UNIQUE NOT NULL,
+    name_fr VARCHAR(150) NOT NULL,
+    name_en VARCHAR(150) NOT NULL,
+    price_amount DECIMAL(12,2) NOT NULL,
+    display_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Données initiales : reprend à l'identique les packs qui étaient
+-- codés en dur dans le frontend (src/pricing/data/pricingData.js),
+-- pour que la migration soit invisible côté visiteurs.
+
+INSERT INTO pricing_plans
+    (tier, name_fr, name_en, description_fr, description_en, price_min, price_max, billing, popular, display_order)
+VALUES
+    ('starter', 'Starter', 'Starter', 'Idéal pour les petites structures et projets simples', 'Ideal for small businesses and simple projects', 150000, 500000, 'project', FALSE, 0),
+    ('business', 'Business', 'Business', 'Pour PME et entreprises en croissance', 'For growing SMEs and companies', 501000, 1200000, 'project', TRUE, 1),
+    ('enterprise', 'Enterprise', 'Enterprise', 'Solution complète pour grandes organisations', 'Full solution for large organizations', 1201000, NULL, 'project', FALSE, 2);
+
+INSERT INTO pricing_plan_features (plan_id, label_fr, label_en, display_order) VALUES
+    ((SELECT id FROM pricing_plans WHERE tier = 'starter'), 'Site vitrine de 3 à 10 pages', '3 to 10-page website', 0),
+    ((SELECT id FROM pricing_plans WHERE tier = 'starter'), 'Design responsive', 'Responsive design', 1),
+    ((SELECT id FROM pricing_plans WHERE tier = 'starter'), 'Formulaire de contact', 'Contact form', 2),
+    ((SELECT id FROM pricing_plans WHERE tier = 'starter'), 'Support 3 mois', '3 months support', 3),
+
+    ((SELECT id FROM pricing_plans WHERE tier = 'business'), 'Site professionnel avancé', 'Advanced business website', 0),
+    ((SELECT id FROM pricing_plans WHERE tier = 'business'), 'Dashboard admin', 'Admin dashboard', 1),
+    ((SELECT id FROM pricing_plans WHERE tier = 'business'), 'Intégration API', 'API integration', 2),
+    ((SELECT id FROM pricing_plans WHERE tier = 'business'), 'SEO optimisé', 'SEO optimized', 3),
+    ((SELECT id FROM pricing_plans WHERE tier = 'business'), 'Support 6 mois', '6 months support', 4),
+
+    ((SELECT id FROM pricing_plans WHERE tier = 'enterprise'), 'Plateforme sur mesure', 'Custom platform', 0),
+    ((SELECT id FROM pricing_plans WHERE tier = 'enterprise'), 'BI & Data dashboards', 'BI & Data dashboards', 1),
+    ((SELECT id FROM pricing_plans WHERE tier = 'enterprise'), 'Architecture scalable', 'Scalable architecture', 2),
+    ((SELECT id FROM pricing_plans WHERE tier = 'enterprise'), 'Sécurité avancée', 'Advanced security', 3),
+    ((SELECT id FROM pricing_plans WHERE tier = 'enterprise'), 'Support premium 12 mois', 'Premium 12 months support', 4);
+
+INSERT INTO pricing_addons (slug, name_fr, name_en, price_amount, display_order) VALUES
+    ('maintenance', 'Maintenance', 'Maintenance', 150000, 0),
+    ('seo', 'SEO avancé', 'Advanced SEO', 200000, 1),
+    ('mobile_app', 'Application mobile', 'Mobile app', 800000, 2);
+
+-- ============================================================
 -- MODULE PARTENAIRES
 -- Reconstruit à partir du schéma réel de la base de développement
 -- (ces tables étaient utilisées par le backend — partnerController,

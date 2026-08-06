@@ -3,7 +3,7 @@
 import React from "react";
 import { Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { pricingData } from "../data/pricingData";
+import { usePricing } from "../context/PricingContext";
 import PriceDisplay from "./PriceDisplay";
 
 
@@ -14,7 +14,11 @@ export default function PricingComparison() {
   const lang = i18n.language || "fr";
 
 
-  const plans = pricingData.plans;
+  const { plans, plansLoading, plansError } = usePricing();
+
+  if (plansLoading || plansError || !plans.length) {
+    return null;
+  }
 
 
   // Liste de toutes les fonctionnalités
@@ -100,7 +104,9 @@ export default function PricingComparison() {
 
                     <PriceDisplay
 
-                      amount={plan.price.amount}
+                      min={plan.price.min}
+
+                      max={plan.price.max}
 
                       currency={
                         plan.price.currency || "FCFA"
@@ -164,17 +170,15 @@ export default function PricingComparison() {
 
                       {hasFeature ? (
 
-                        <Check
-
-                          size={20}
-
-                          className="text-green-600"
-
-                        />
+                        <span className="comparison-check-icon">
+                          <Check size={15} />
+                        </span>
 
                       ) : (
 
-                        "—"
+                        <span className="text-slate-300 dark:text-slate-600">
+                          —
+                        </span>
 
                       )}
 
@@ -203,6 +207,15 @@ export default function PricingComparison() {
 
 
       </div>
+
+
+      <p className="comparison-note">
+
+        {lang === "fr"
+          ? "Tous nos packs incluent un hébergement offert d'un an à la signature du contrat."
+          : "All our plans include one year of free hosting upon signing the contract."}
+
+      </p>
 
 
     </section>

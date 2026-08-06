@@ -13,6 +13,7 @@ import {
   Briefcase,
   Image,
   Handshake,
+  Tag,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -63,6 +64,11 @@ export default function AdminLayout() {
     label: "Portfolio",
     path: "/admin/portfolio",
     icon: Image,
+    },
+    {
+      label: "Tarifs",
+      path: "/admin/pricing",
+      icon: Tag,
     },
     {
       label: "Paramètres",

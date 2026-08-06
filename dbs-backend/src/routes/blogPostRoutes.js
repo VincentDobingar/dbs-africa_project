@@ -3,11 +3,24 @@ const router = express.Router();
 
 const upload = require("../middlewares/uploadMiddleware");
 const blogPostController = require("../controllers/blogPostController");
+const { requireAuth, requireRole } = require("../middlewares/authMiddleware");
+
+const requireAdmin = [requireAuth, requireRole("admin", "superadmin")];
 
 router.get("/", blogPostController.getAllBlogPosts);
 router.get("/:id", blogPostController.getBlogPostById);
-router.post("/", upload.single("image"), blogPostController.createBlogPost);
-router.put("/:id", upload.single("image"), blogPostController.updateBlogPost);
-router.delete("/:id", blogPostController.deleteBlogPost);
+router.post(
+  "/",
+  requireAdmin,
+  upload.single("image"),
+  blogPostController.createBlogPost
+);
+router.put(
+  "/:id",
+  requireAdmin,
+  upload.single("image"),
+  blogPostController.updateBlogPost
+);
+router.delete("/:id", requireAdmin, blogPostController.deleteBlogPost);
 
 module.exports = router;
