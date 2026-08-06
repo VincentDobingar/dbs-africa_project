@@ -33,6 +33,7 @@ const Portfolio = lazy(() => import("./pages/public/Portfolio"));
 const Certifications = lazy(() => import("./pages/public/Certifications"));
 const Careers = lazy(() => import("./pages/public/Careers"));
 const Blog = lazy(() => import("./pages/public/Blog"));
+const BlogPostDetail = lazy(() => import("./pages/public/BlogPostDetail"));
 const Contact = lazy(() => import("./pages/public/Contact"));
 const QuoteRequest = lazy(() => import("./pages/public/QuoteRequest"));
 const LegalNotice = lazy(() => import("./pages/public/LegalNotice"));
@@ -200,10 +201,20 @@ export default function App() {
               element={<Blog />}
             />
 
+            <Route
+              path="/blog/:slug"
+              element={<BlogPostDetail />}
+            />
+
             {/* Alias correspondant au nom de page "Insights" du positionnement DBS Africa */}
             <Route
               path="/insights"
               element={<Blog />}
+            />
+
+            <Route
+              path="/insights/:slug"
+              element={<BlogPostDetail />}
             />
 
             <Route

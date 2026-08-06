@@ -117,7 +117,7 @@ export default function Blog() {
                   </p>
 
                   <Link
-                    to="/contact"
+                    to={`/insights/${post.slug}`}
                     className="mt-6 inline-flex items-center gap-2 text-dbsOrange font-semibold hover:underline"
                   >
                     {t("blogPage.readMore")}
