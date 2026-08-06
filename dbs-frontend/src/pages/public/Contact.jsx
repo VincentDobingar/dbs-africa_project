@@ -453,19 +453,30 @@ export default function Contact() {
               ))}
             </div>
 
-            <div className="mt-8 rounded-3xl bg-dbsDark p-7 text-white">
-              <MapPin
-                className="mb-4 text-dbsOrange"
-                size={34}
+            <div className="mt-8 overflow-hidden rounded-3xl bg-dbsDark text-white">
+              <div className="p-7">
+                <MapPin
+                  className="mb-4 text-dbsOrange"
+                  size={34}
+                />
+
+                <h3 className="text-xl font-bold">
+                  {t("contactPage.locationTitle")}
+                </h3>
+
+                <p className="mt-2 text-gray-300">
+                  {t("contactPage.locationText")}
+                </p>
+              </div>
+
+              <iframe
+                title="Localisation du bureau DBS Africa à N'Djaména"
+                src="https://www.google.com/maps?q=Chagoua+FDAR%2C+N%27Djamena%2C+Tchad&output=embed"
+                className="h-64 w-full grayscale-[30%]"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
               />
-
-              <h3 className="text-xl font-bold">
-                {t("contactPage.locationTitle")}
-              </h3>
-
-              <p className="mt-2 text-gray-300">
-                {t("contactPage.locationText")}
-              </p>
             </div>
           </div>
 

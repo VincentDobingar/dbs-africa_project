@@ -121,6 +121,8 @@ const resources = {
           "Conçu pour la transformation digitale et la croissance des entreprises.",
         aboutDescription:
           "DBS Africa accompagne les organisations publiques, privées et humanitaires en Afrique dans leur transformation digitale, en combinant expertise data, ingénierie logicielle et infrastructures IT pour transformer les données en décisions et les idées en impact durable.",
+        legalNotice: "Mentions légales",
+        terms: "Conditions d'utilisation",
       },
 
       visual: {
@@ -817,7 +819,7 @@ const resources = {
         linkedinTitle: "LinkedIn",
 
         locationTitle: "Localisation",
-        locationText: "Burundi | Afrique | Collaboration à distance possible",
+        locationText: "Quartier Chagoua FDAR, N'Djaména, Tchad | Collaboration à distance possible",
 
         formTitle: "Envoyer un message",
         fullName: "Nom complet",
@@ -843,7 +845,7 @@ const resources = {
 
       quotePage: {
         label: "Demande de devis",
-        title: "Décrivez votre projet et recevons votre besoin",
+        title: "Décrivez votre projet et nous concevrons votre besoin",
         number: "Numéro",
         phone: "Numéro de téléphone",
         selectCountryFirst: "Sélectionnez d’abord votre pays.",
@@ -945,6 +947,9 @@ const resources = {
 
       currency: "Devise",
       selectCurrencyFirst: "Choisissez d'abord une devise",
+
+      prefillNotice: "Pack « {{plan}} » présélectionné à partir de la page tarifs.",
+      prefillDescription: "Je suis intéressé(e) par le pack {{plan}} ({{price}}). ",
 
       sectors: {
         telecom: "Télécommunications",
@@ -1051,10 +1056,16 @@ const resources = {
             "Une excellente expertise en développement web, structuration de contenus et mise en place d’une plateforme institutionnelle moderne.",
         },
 
-        ndof: {
-          role: "Conseil & Consulting",
+        eden: {
+          role: "Commerce & Textile",
           text:
-            "Professionnalisme, réactivité et qualité des livrables. DBS a su comprendre nos besoins et proposer une solution adaptée.",
+            "DBS nous a livré une vitrine digitale moderne pour présenter nos produits, avec une gestion de contenu simple et un accompagnement attentif à chaque étape.",
+        },
+
+        cdo: {
+          role: "Recrutement & Emploi",
+          text:
+            "DBS a conçu un portail de recrutement fiable et intuitif, de la publication des offres jusqu’à la gestion des candidatures. Un vrai gain de temps pour nos équipes.",
         },
       },
 
@@ -1508,6 +1519,8 @@ const resources = {
         designed: "Designed for digital transformation and business growth.",
         aboutDescription:
           "DBS Africa supports public, private and humanitarian organisations across Africa in their digital transformation, combining data expertise, software engineering and IT infrastructure to turn data into decisions and ideas into lasting impact.",
+        legalNotice: "Legal Notice",
+        terms: "Terms of Service",
       },
 
       visual: {
@@ -2212,7 +2225,7 @@ const resources = {
         linkedinTitle: "LinkedIn",
 
         locationTitle: "Location",
-        locationText: "Burundi | Africa | Remote collaboration available",
+        locationText: "Chagoua FDAR district, N'Djamena, Chad | Remote collaboration available",
 
         formTitle: "Send a message",
         fullName: "Full name",
@@ -2241,7 +2254,7 @@ const resources = {
         number: "Number",
         phone: "Phone number",
         selectCountryFirst: "Select your country first.",
-        title: "Describe your project and share your needs",
+        title: "Describe your project and we'll design your solution",
         subtitle:
           "Fill out this form to help DBS better understand your project and propose a tailored solution.",
 
@@ -2339,6 +2352,10 @@ const resources = {
       organizationName: "Organization Name",
 
       currency: "Currency",
+      selectCurrencyFirst: "Select a currency first",
+
+      prefillNotice: "\"{{plan}}\" plan pre-selected from the pricing page.",
+      prefillDescription: "I'm interested in the {{plan}} plan ({{price}}). ",
 
       sectors: {
         telecom: "Telecommunications",
@@ -2413,7 +2430,6 @@ const resources = {
         ctaButton: "Contact Us",
         ctaContact: "Contact Us",
         noPosts: "No published articles available at the moment.",
-        selectCurrencyFirst: "Select a currency first",
       },
 
       homePartners: {
@@ -2441,10 +2457,16 @@ const resources = {
             "Excellent expertise in web development, content structuring and implementation of a modern institutional platform.",
         },
 
-        ndof: {
-          role: "Consulting",
+        eden: {
+          role: "Business & Retail",
           text:
-            "Professionalism, responsiveness and quality deliverables. DBS understood our needs and proposed a tailored solution.",
+            "DBS delivered a modern digital showcase for our products, with simple content management and attentive support at every step.",
+        },
+
+        cdo: {
+          role: "Recruitment & Employment",
+          text:
+            "DBS built us a reliable and intuitive recruitment portal, from job postings to application management. A real time-saver for our teams.",
         },
       },
 

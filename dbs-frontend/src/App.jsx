@@ -35,6 +35,8 @@ const Careers = lazy(() => import("./pages/public/Careers"));
 const Blog = lazy(() => import("./pages/public/Blog"));
 const Contact = lazy(() => import("./pages/public/Contact"));
 const QuoteRequest = lazy(() => import("./pages/public/QuoteRequest"));
+const LegalNotice = lazy(() => import("./pages/public/LegalNotice"));
+const TermsOfService = lazy(() => import("./pages/public/TermsOfService"));
 const NotFound = lazy(() => import("./pages/public/NotFound"));
 
 /* PRICING (lazy: not needed by public visitors browsing other pages) */
@@ -52,11 +54,15 @@ const ActualitesManager = lazy(() =>
   import("./pages/admin/ActualitesManager")
 );
 const PortfolioManager = lazy(() => import("./pages/admin/PortfolioManager"));
+const PricingManager = lazy(() => import("./pages/admin/PricingManager"));
 const SettingsManager = lazy(() => import("./pages/admin/SettingsManager"));
 const UsersManager = lazy(() => import("./pages/admin/UsersManager"));
 const PartnersManager = lazy(() => import("./pages/admin/PartnersManager"));
 
 /* PARTNERS (lazy: not needed by public visitors) */
+const PartnerProgram = lazy(() =>
+  import("./modules/partners/pages/PartnerProgram")
+);
 const PartnerRegister = lazy(() =>
   import("./modules/partners/pages/PartnerRegister")
 );
@@ -89,7 +95,7 @@ export default function App() {
     location.pathname.startsWith("/admin");
 
   const isPartnerRoute =
-    location.pathname.startsWith("/partner");
+    location.pathname.startsWith("/partner/");
 
   const showPublicLayout =
     !isAdminRoute && !isPartnerRoute;
@@ -210,10 +216,25 @@ export default function App() {
               element={<QuoteRequest />}
             />
 
+            <Route
+              path="/legal-notice"
+              element={<LegalNotice />}
+            />
+
+            <Route
+              path="/terms"
+              element={<TermsOfService />}
+            />
+
             {/* ======================================== */}
             {/* ROUTES PARTENAIRES                       */}
             {/* Elles ne sont pas imbriquées dans admin */}
             {/* ======================================== */}
+
+            <Route
+              path="/partner"
+              element={<PartnerProgram />}
+            />
 
             <Route
               path="/partner/register"
@@ -293,6 +314,11 @@ export default function App() {
               <Route
                 path="portfolio"
                 element={<PortfolioManager />}
+              />
+
+              <Route
+                path="pricing"
+                element={<PricingManager />}
               />
 
               <Route

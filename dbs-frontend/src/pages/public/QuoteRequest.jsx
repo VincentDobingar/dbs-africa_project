@@ -1,6 +1,7 @@
 // src/pages/public/QuoteRequest.jsx
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   Send,
   CheckCircle2,
@@ -19,6 +20,10 @@ import api from "../../api/axios";
 
 export default function QuoteRequest() {
   const { t } = useTranslation();
+
+  const location = useLocation();
+
+  const [prefillNotice, setPrefillNotice] = useState("");
 
   /**
    * Liste des pays :
@@ -134,6 +139,65 @@ export default function QuoteRequest() {
       "10 000 000+ FCFA",
     ],
   };
+
+  /**
+   * Bornes supérieures des tranches de `budgetOptions`, dans le même
+   * ordre, pour pouvoir présélectionner automatiquement la bonne
+   * tranche à partir d'un montant (ex. venant d'un pack Pricing).
+   */
+  const budgetThresholds = {
+    USD: [1000, 3000, 5000, 10000],
+    EUR: [1000, 3000, 5000, 10000],
+    FCFA: [1000000, 2500000, 5000000, 10000000],
+  };
+
+  const getBudgetBracket = (budgetCurrency, amount) => {
+    const thresholds = budgetThresholds[budgetCurrency];
+    const options = budgetOptions[budgetCurrency];
+
+    if (!thresholds || !options || !Number.isFinite(amount)) {
+      return "";
+    }
+
+    const index = thresholds.findIndex(
+      (threshold) => amount < threshold
+    );
+
+    return options[index === -1 ? options.length - 1 : index];
+  };
+
+  /**
+   * Pré-remplissage du formulaire lorsqu'on arrive depuis un pack
+   * de la page Pricing (state de navigation transmis par PricingCard).
+   */
+  useEffect(() => {
+    const selectedPlan = location.state;
+
+    if (!selectedPlan?.planCurrency) {
+      return;
+    }
+
+    setCurrency(selectedPlan.planCurrency);
+
+    setFormData((previousData) => ({
+      ...previousData,
+      budget: getBudgetBracket(
+        selectedPlan.planCurrency,
+        selectedPlan.planAmount
+      ),
+      description: t("quotePage.prefillDescription", {
+        plan: selectedPlan.planName,
+        price: selectedPlan.planAmountFormatted,
+      }),
+    }));
+
+    setPrefillNotice(
+      t("quotePage.prefillNotice", {
+        plan: selectedPlan.planName,
+      })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /**
    * Indicatif téléphonique selon le pays.
@@ -563,6 +627,15 @@ export default function QuoteRequest() {
               <h2 className="mb-6 font-heading text-3xl font-bold dark:text-white">
                 {t("quotePage.formTitle")}
               </h2>
+
+              {prefillNotice && (
+                <div
+                  role="status"
+                  className="mb-6 rounded-xl border border-orange-200 bg-orange-50 px-4 py-3 text-sm font-medium text-orange-700 dark:border-orange-900 dark:bg-orange-950 dark:text-orange-300"
+                >
+                  {prefillNotice}
+                </div>
+              )}
 
               <div className="grid gap-5 sm:grid-cols-2">
                 {/* TYPE DE CLIENT */}

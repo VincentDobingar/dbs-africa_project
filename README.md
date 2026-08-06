@@ -136,6 +136,19 @@ Dans **Setup Node.js App** → l'application → **Run NPM Install** (bouton dé
 
 Sur l'hébergement du frontend, définir `VITE_API_URL=https://api.dbs-africa.org/api` avant `npm run build`, puis déployer le contenu de `dbs-frontend/dist/`.
 
+### 10. Cron de keep-alive (`/health`)
+
+Passenger met l'application Node en veille après une période d'inactivité ; le premier réveil ("cold start") peut se traduire côté client par une erreur CORS/redirection transitoire sur `/api/contact`. Pour éviter ça, ajouter un cron qui ping `/health` régulièrement :
+
+cPanel → **Cron Jobs** → **Add New Cron Job** :
+- **Minute** : `*/10`, Heure/Jour/Mois/Jour de semaine : `*`
+- **Command** :
+  ```
+  curl -s -o /dev/null https://api.dbs-africa.org/health
+  ```
+
+(Si un accès SSH est disponible, la ligne crontab équivalente est `*/10 * * * * curl -s -o /dev/null https://api.dbs-africa.org/health`.)
+
 ## État du projet
 
 Refonte réalisée en plusieurs phases : structure des 11 pages, cohérence visuelle, dark mode / SEO structuré / accessibilité / animations, catégorisation du portfolio (Web / Data / Humanitaire). Voir l'historique Git pour le détail des changements.

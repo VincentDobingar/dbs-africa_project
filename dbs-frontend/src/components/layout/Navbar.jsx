@@ -310,7 +310,7 @@ export default function Navbar() {
 
             <div className="flex shrink-0 items-center gap-3">
               <NavLink
-                to="/partner/login"
+                to="/partner"
                 className={[
                   "inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5",
                   "text-sm font-semibold transition duration-300",
@@ -474,7 +474,7 @@ export default function Navbar() {
 
               <div className="mt-4 grid gap-3 border-t border-gray-100 pt-5 dark:border-gray-800 sm:grid-cols-2">
                 <Link
-                  to="/partner/login"
+                  to="/partner"
                   onClick={closeMenu}
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-dbsOrange px-5 py-3 text-sm font-semibold text-dbsOrange transition hover:bg-orange-50 dark:hover:bg-orange-500/10"
                 >
