@@ -19,10 +19,14 @@ export default function TechnologiesSection() {
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/80" />
+      <div className="absolute inset-0 bg-black/85" />
 
       {/* Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/85" />
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-950/95 via-black/75 to-gray-950/95" />
+
+      {/* Glow decorations */}
+      <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-dbsOrange/15 blur-[120px]" />
+      <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-blue-500/15 blur-[130px]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 lg:px-8">
         <div className="text-center max-w-4xl mx-auto mb-16">

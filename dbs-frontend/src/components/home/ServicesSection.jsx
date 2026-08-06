@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { services } from "../../data/homeData.jsx";
@@ -10,7 +11,12 @@ export default function ServicesSection() {
     <section className="py-20 bg-white dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-3 gap-10">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <p className="text-dbsOrange font-semibold uppercase">
               {t("services.sectionLabel")}
             </p>
@@ -29,16 +35,23 @@ export default function ServicesSection() {
             >
               {t("services.viewAll")} →
             </Link>
-          </div>
+          </motion.div>
 
           <div className="lg:col-span-2 grid md:grid-cols-2 gap-6">
-            {services.map((service) => (
-              <ServiceCard
+            {services.map((service, index) => (
+              <motion.div
                 key={service.titleKey}
-                icon={service.icon}
-                title={t(service.titleKey)}
-                text={t(service.textKey)}
-              />
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+              >
+                <ServiceCard
+                  icon={service.icon}
+                  title={t(service.titleKey)}
+                  text={t(service.textKey)}
+                />
+              </motion.div>
             ))}
           </div>
         </div>

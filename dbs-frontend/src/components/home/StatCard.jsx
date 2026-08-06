@@ -34,7 +34,7 @@ export default function StatCard({ value, label, sub, icon }) {
   }, [finalValue]);
 
   return (
-    <div className="rounded-2xl border border-white/20 bg-black/30 p-7 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-black/40 hover:shadow-xl hover:shadow-orange-500/20">
+    <div className="rounded-2xl border border-white/20 bg-black/30 p-7 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:border-dbsOrange/40 hover:bg-black/40 hover:shadow-xl hover:shadow-orange-500/20">
       <div className="flex items-center gap-6">
         <div className="text-dbsOrange">
           <Icon size={46} strokeWidth={2.2} />

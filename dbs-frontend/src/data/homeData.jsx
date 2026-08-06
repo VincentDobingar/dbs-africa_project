@@ -111,9 +111,13 @@ export const technologies = [
   "SSRS",
   "Tableau",
   "Git & GitHub",
-  "Python", 
-  "R", 
+  "Python",
+  "R",
   "SPSS",
+  "React Native",
+  "Flutter",
+  "Kotlin",
+  "Swift",
 ];
 
 export const projects = [

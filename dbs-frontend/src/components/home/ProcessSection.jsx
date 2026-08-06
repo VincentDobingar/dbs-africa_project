@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import ProcessCard from "./ProcessCard";
 
@@ -22,11 +23,20 @@ export default function ProcessSection() {
         }}
       />
 
-      <div className="absolute inset-0 bg-black/75" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/85" />
+      <div className="absolute inset-0 bg-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-950/95 via-black/70 to-gray-950/95" />
+
+      <div className="pointer-events-none absolute left-1/3 top-0 h-72 w-72 rounded-full bg-dbsOrange/15 blur-[130px]" />
+      <div className="pointer-events-none absolute -bottom-24 right-0 h-80 w-80 rounded-full bg-blue-500/15 blur-[130px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
-        <div className="max-w-3xl mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-3xl mb-14"
+        >
           <p className="text-dbsOrange font-semibold uppercase">
             {t("process.label")}
           </p>
@@ -38,16 +48,23 @@ export default function ProcessSection() {
           <p className="mt-5 text-gray-300">
             {t("process.description")}
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-4 gap-6">
           {processSteps.map((step, index) => (
-            <ProcessCard
+            <motion.div
               key={step}
-              number={`0${index + 1}`}
-              title={step}
-              description={t("process.stepDescription")}
-            />
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <ProcessCard
+                number={`0${index + 1}`}
+                title={step}
+                description={t("process.stepDescription")}
+              />
+            </motion.div>
           ))}
         </div>
       </div>

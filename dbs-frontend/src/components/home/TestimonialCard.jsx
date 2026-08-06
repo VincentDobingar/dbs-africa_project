@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Quote } from "lucide-react";
 
 export default function TestimonialCard({
   name,
@@ -11,6 +12,8 @@ export default function TestimonialCard({
       whileHover={{ y: -8 }}
       className="rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all p-8 dark:border-gray-800 dark:bg-gray-950"
     >
+      <Quote className="mb-4 text-dbsOrange/60" size={32} fill="currentColor" strokeWidth={0} />
+
       <div className="flex gap-1 text-dbsOrange mb-5">
         ★★★★★
       </div>
