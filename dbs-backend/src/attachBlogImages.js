@@ -1,5 +1,7 @@
 // ============================================================
-// Attache une image de couverture à chaque article "Formation".
+// Attache une image de couverture à chaque article de blog qui en
+// a besoin (formations + actualités dont l'image référencée était
+// manquante/cassée).
 //
 // Copie l'image correspondante depuis assets/blog-images/ (suivi
 // par git) vers uploads/ (non versionné, servi statiquement), puis
@@ -9,7 +11,7 @@
 //
 // Usage (depuis dbs-backend/, avec le .env de l'environnement
 // cible déjà en place) :
-//   node src/attachFormationImages.js
+//   node src/attachBlogImages.js
 // ============================================================
 
 require("dotenv").config();
@@ -32,6 +34,26 @@ const IMAGES = [
   {
     slug: "formation-cybersecurite-systeme-information",
     filename: "formation-cybersecurite-systeme-information.png",
+  },
+  {
+    slug: "transformation-digitale-reussie",
+    filename: "transformation-digitale-reussie.png",
+  },
+  {
+    slug: "automatisation-rapports-sql-powerbi",
+    filename: "automatisation-rapports-sql-powerbi.png",
+  },
+  {
+    slug: "react-nodejs-applications-modernes",
+    filename: "react-nodejs-applications-modernes.png",
+  },
+  {
+    slug: "data-decision-strategique",
+    filename: "data-decision-strategique.png",
+  },
+  {
+    slug: "telecom-mobile-money-afrique",
+    filename: "telecom-mobile-money-afrique.png",
   },
 ];
 
@@ -64,7 +86,7 @@ const IMAGES = [
       }
     }
 
-    console.log("✅ Images des formations vérifiées et prêtes.");
+    console.log("✅ Images des articles vérifiées et prêtes.");
   } catch (error) {
     console.error("❌ Erreur lors de l'attachement des images :", error);
     process.exitCode = 1;
