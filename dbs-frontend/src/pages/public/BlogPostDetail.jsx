@@ -19,7 +19,7 @@ import HeroSection from "../../shared/components/HeroSection";
 import blogBg from "../../assets/images/blog-bg.jpg";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
-const BASE_URL = API_URL.replace("/api", "");
+const BASE_URL = API_URL.replace(/\/api$/, "");
 
 export default function BlogPostDetail() {
   const { slug } = useParams();

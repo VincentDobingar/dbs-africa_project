@@ -140,7 +140,7 @@ export default function PortfolioManager() {
   const getImage = (imageUrl) => {
     if (!imageUrl) return null;
     if (imageUrl.startsWith("http")) return imageUrl;
-    return `${API_URL.replace("/api", "")}${imageUrl}`;
+    return `${API_URL.replace(/\/api$/, "")}${imageUrl}`;
   };
 
   return (
