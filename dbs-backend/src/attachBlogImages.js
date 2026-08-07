@@ -55,6 +55,10 @@ const IMAGES = [
     slug: "telecom-mobile-money-afrique",
     filename: "telecom-mobile-money-afrique.png",
   },
+  {
+    slug: "power-bi-reporting-moderne",
+    filename: "power-bi-reporting-moderne.png",
+  },
 ];
 
 (async () => {
